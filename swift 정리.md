@@ -268,3 +268,259 @@
 - 특정 접근제어 수준의 타입이 함수의 매개변수나 반환되는 타입일 경우 함수는 해당 값은 접근제어보다 높을 수 없음
   -  메소드나 함수가 public한데 private한 매개변수를 받거나 private한 값을 반환하는 것은 상식적으로 맞지 않음. 
   -  이때 매개변수의 타입이나 반환되는 값의 접근제어 수준은 메소드나 함수의 접근제어 수준과 같거나 높아야 함
+
+
+
+## Self
+
+- 모든 타입 인스턴스는 `self`라는 명확한 속성을 가지며, 인스턴스 자신과 정확하게 동일
+- self 속성을 사용하여 자신의 인스턴스 메소드 내에서 현재 인스턴스를 참조
+- self 속성은 인자 이름과 속성 이름을 분리하도록 사용
+
+
+
+## instance / class / static
+
+~~~ swift
+class Sample {
+// 1. Instance 함수
+func myInstanceFunc() {}
+// 2. class 함수
+class func myClassFunc() {}
+// 3. static 함수
+static func myStaticFunc() {}
+}
+~~~
+
+#### static, class 
+
+- 두 메소드는 타입 메소드
+
+- class 객체보다는 **class 자체**와 연관
+
+- () 생성자를 통해서 인스턴스를 생성하지 않더라도 바로 접근이 가능
+
+  ~~~ Swift
+  Sample.myClassFunc()
+  Sample.myStaticFunc()
+  ~~~
+
+- 차이점 
+
+  - class : override 가능
+
+  - static : override 불가능
+
+    ~~~ swift
+    class SubSample : Sample {
+    //Good!
+    override class func myClassFunc() {}
+    //Compile Error
+    override static func myStaticFunc() {}
+    }
+    ~~~
+
+  - 그러므로 상속이 불가능한 struct, enum에서 class func을 정의하면 에러 발생
+
+#### static func VS final class func
+
+~~~ swift
+class Sample {
+    class func myClassFunc() {}
+    static func myStaticFunc() {}
+}
+
+//style 1 : final class
+class SubSample1 : Sample {
+    override final class func myClassFunc() {}
+}
+
+//style 2 : static
+class SubSample2 : Sample {
+    override static func myClassFunc() {}
+}
+// 같다!
+~~~
+
+
+
+#### 타입 프로퍼티
+
+- 타입 메소드 : static func, class func
+
+- 타입 프로퍼티 : 프로퍼티 앞에 static, class가 붙은 것
+
+  ~~~ swift
+  class PropertySample {
+      static var myStaticProperty = 1
+  
+      class var myClassProperty: Int {
+          return 1
+      }
+  }
+  
+  class SubPropertySample : PropertySample {
+      override class var myClassProperty: Int {
+          return 2
+      }
+  }
+  ~~~
+
+- 특징은 타입 메소드와 같음 (생성자 없이 바로 접근 가능, class 프로퍼티만 상속 가능)
+
+- **class 타입 프로퍼티** 같은 경우, **연산 타입 프로퍼티**(Computed type property)로 표현해야 함
+
+  ~~~ swift
+  // 저장 타입 프로퍼티 형태 - 컴파일 에러
+  class var errorClassProperty: Int = 1
+  // 연산 타입 프로퍼티 형태 - 컴파일 OK
+  class var correctClassProperty: Int {
+     return 1
+  }
+  
+  // let- 컴파일 에러
+  class let errorClassProperty: Int {
+     return 1
+  }
+  // var - 컴파일 OK
+  class var correctClassProperty: Int {
+     return 1
+  }
+  ~~~
+
+#### static을 사용하는 이유??
+
+- 해당 메소드나 프로퍼티가 instance보다는 type자체와 연관될 때 사용
+- static property
+  - 자주 변하지 않고 전역 변수처럼 공통으로 관리하는 공용 자원 느낌일 때 사용 (색상, 폰트 등...)
+  - 자주 재사용되고 생성 비용이 많이 드는 object를 미리 만들어 놓고 계속 사용하면 효율을 높일 수 있을 때 (dateformatter 등...)
+- static method
+  - 간단한 factory 패턴 구현 시 사용
+
+
+
+## Metatype
+
+- 타입의 타입 (..?)
+
+  ~~~ swift
+  struct Medium {
+      static let author = "naljin"
+      func postArticle(name: String) {}
+  }
+  
+  let blog: Medium = Medium()
+  ~~~
+
+  - blog 이름으로 생성한 인스턴스에서 
+    - 인스턴스 메소드인 postArticle() 호출 가능
+    - 클래스 프로퍼티인 author에는 접근 불가능
+  - author에 접근하기 !
+    - Medium.author
+    - let something = type(of: blog) // Medium.Type
+    - Medium의 Type은 Medium.Type // 타입의 타입 -> 메타타입
+
+- 클래스의 메타타입 : SomeClass.Type
+
+- 프로토콜의 메타타입 : someProtocol.Protocol
+
+- someClass.self : 자기 자신을 반환
+
+- someProtocol.self : 런타입에 someProtocol을 준수하는 타입의 인스턴스가 아닌 someProtocol 자체를 반환
+
+  ~~~ swift
+  class SomeBaseClass {
+      class func printClassName() {
+          print("SomeBaseClass")
+      }
+  }
+  class SomeSubClass: SomeBaseClass {
+      override class func printClassName() {
+          print("SomeSubClass")
+      }
+  }
+  // 컴파일타임에는 SomeBaseClass의 인스턴스 타입
+  // 런타임에는 SomeSubClass의 인스턴스 타입
+  let someInstance: SomeBaseClass = SomeSubClass()
+  
+  type(of: someInstance).printClassName()
+  ~~~
+
+  ~~~ swift
+  print("\n---------- [ Instance Type Check ] ----------\n")
+  
+  let str = "StringInstance"
+  print(str is String)           // true, str 은 String Type 의 객체, 스트링의 객체가 맞으면 참트루
+  print(str == "StringInstance") // true, str 은 "StringInstance" 와 동일
+  print(str is String.Type)      // false
+  print(str is String.Type.Type) // false
+  
+  
+  
+  print("\n---------- [ Type's Type check ] ----------\n")
+  
+  print(type(of: str) is String)       // false, String is String 과 동일.. 그니까 String == String.Type을 물어본거
+  print(type(of: str) == String.self)  // true, str 객체의 타입은 String 그 자체, String.Type == String.Type
+  print(type(of: str) is String.Type)  // true, str 객체의 타입은 String.Type 의 객체 String의 타입 == String.type
+  
+  
+  
+  print("\n---------- [ Metatype's Type check ] ----------\n")
+  
+  private let meta = type(of: String.self)
+  print(meta is String)  // false
+  print(meta == String.self)  // false
+  print(meta == String.Type.self)  // true, String 메타타입은 String.Type
+  print(meta is String.Type.Type)  // true, String 메타타입은 String.Type.Type 의 객체
+  ~~~
+
+  
+
+## Protocol
+
+- 특정 역할을 하기 위한 메소드, 프로퍼티, 기타 요구사항등의 청사진
+
+#### 사용
+
+- 구조체, 클래스, 열거형은 프로토콜을 채택해서 특정 기능을 실행하기 위한 프로토콜의 요구사항을 실제로 구현 가능
+- 프로토콜은 정의를 하고 제시를 할 뿐 스스로 구현하지는 않음 (조건만 정의)
+- 하나의 타입으로 사용되기 때문에 아래와 같은 타입 사용이 허용되는 모든 곳에 프로토콜 사용 가능
+  - 함수, 메소드, 이니셜라이저의 파라미터 타입 혹은 리턴 타입
+  - 상수, 변수, 프로퍼티의 타입
+  - 배열, 딕셔너리의 원소타입
+
+##### 기본 형태
+
+~~~ swift
+protocol 프로토콜이름 {
+ // 프로토콜 정의
+}
+~~~
+
+
+
+## 인터페이스 VS 추상클래스
+
+#### 인터페이스는 구현부를 가질 수 없음
+
+- 인터페이스 메소드들은 무조건 추상메소드로 구현부를 가질 수 없음
+- 추상클래스는 기본 동작을 구현한 인스턴스 메소드를 가질 수 있음
+
+#### 인터페이스는 다중 상속 가능
+
+- 추상클래스는 다중 상속 불가능
+
+
+
+## 프로토콜 VS 인터페이스
+
+#### 프로토콜은 옵셔널 키워드를 통해 선택적으로 메소드 설계 가능
+
+- 일반적으로 특정 인터페이스를 상속한 클래스는 인터페이스에 포함된 모든 메소드를 의무적으로 구현해야 함
+- 하지만 프로토콜의 경우 옵셔널 키워드를 사용하면  선택적으로 구현하는 메소드를 만들 수 있음 
+- 자주 사용하는 UITableViewDelegate만 해도 상속만 하고 사용하지 않는 내부 메소드가 대부분
+
+#### 프로토콜 Static 멤버 선언 가능
+
+#### 프로토콜은 프로퍼티에 초기 값을 지정 가능
+
