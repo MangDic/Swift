@@ -524,3 +524,150 @@ protocol 프로토콜이름 {
 
 #### 프로토콜은 프로퍼티에 초기 값을 지정 가능
 
+
+
+## Delegation
+
+- Delegate : 대표(자), 사절, 위임, 대리(자), 위임하다, 선정하다
+
+#### Delegation Design Pattern
+
+- 하나의 객체가 다른 객체를 대신해 동작 또는 조정할 수 있는 기능을 제공
+
+- Foundation, UIKit, AppKit, Cocoa Touch 등 애플의 프레임워크에서 광범위하게 활용
+
+- 주로 프레임워크 객체가 위임 요청, 커스텀 컨트롤러 객체가 위임받아 특정 이벤트에 대한 기능 구현
+
+- 커스텀 컨트롤러에서 세부 동작을 구현함으로써 동일한 동작에 대해 다양한 대응을 할 수 있게 해줌
+
+  ~~~ swift
+  // UITextFieldDelegate 예시
+  
+  // 대리자에게 특정 텍스트 필드의 문구를 편집해도 되는지 묻는 메서드
+  func textFieldShouldBeginEditing(UITextField)
+  	
+  // 대리자에게 특정 텍스트 필드의 문구가 편집되고 있음을 알리는 메서드
+  func textFieldDidBeginEditing(UITextField)
+  
+  // 특정 텍스트 필드의 문구를 삭제하려고 할 때 대리자를 호출하는 메서드
+  func textFieldShouldClear(UITextField)
+  
+  // 특정 텍스트 필드의 `Return` 키가 눌렸을 때 대리자를 호출하는 메서드
+  func textFieldShouldReturn(UITextField)
+  ~~~
+
+  - 델리게이트는 특정 상황에 대리자에게 메시지를 전달하고 그에 적절한 응답 받기 위한 목적으로 사용
+
+  ~~~ swift
+  // 이 뷰의 컨트롤러의 인스턴스가 player의 델리게이터로 역할을 수행하겠다고 할당
+  self.player.delegate = self
+  ~~~
+
+  ~~~ swift
+  // 이미지 피커에서 델리게이트 활용
+  picker.delegate = self
+  ...
+  
+  func imagePickerControllerDidCancel(...) {
+    self.dismiss(...)
+  }
+  
+  func imagePickerController(...) {
+    if let originalImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      self.dismiss(...)
+    }
+  }
+  ~~~
+
+  
+
+  ###### Dismiss
+
+  - 간단히 처리하다
+
+#### 데이터 소스
+
+- 델리게이트와 매우 비슷한 역할
+- 델리게이트 : 사용자 인터페이스 제어에 관한 권한을 위임 받음
+- 데이터소스 : 데이터를 제어하는 기능을 위임 받음
+
+#### 프로토콜
+
+- 코코아터치에서 프로토콜을 사용해 델리게이션과 데이터소스 구현 가능
+- 객체간 소통을 위한 강력한 통신규약으로, 데이터나 메시지를 전달할 때 사용
+- 특정한 상황에 대한 역할을 정의하고 제시하지만, 세부 기능은 미리 구현해두지 않음
+- 구조체, 클래스, 열거형에서 프로토콜을 채택하고 특정 기능을 수행하기 위한 요구사항 구현 가능
+
+
+
+## SingleTon
+
+- 특정 클래스의 인스턴스가 오직 하나임을 보장하는 객체를 의미
+- 애플리케이션이 요청한 횟수와는 관계없이 이미 생성된 같은 인스턴스를 반환
+- 즉, 애플리케이션 내에서 특정 클래스의 인스턴스가 오직 하나뿐이기에 다른 인스턴스들이 공유해서 사용 가능
+
+#### 코코아 프레임워크에서의 싱클턴 디자인 패턴
+
+- 싱글턴 인스턴스를 반환하는 팩토리 메소드나 프로퍼티는 일반적으로 shared라는 이름 사용
+  - `FileManager`
+    - 애플리케이션 파일 시스템을 관리하는 클래스
+    - `FileManager.default`
+  - `URLSession`
+    - URL 세션을 관리하는 클래스
+    - `URLSession.shared`
+  - `NotificationCenter`
+    - 등록된 알림의 정보를 사용할 수 있게 해주는 클래스
+    - `NotificationCenter.default`
+  - `UserDefaults`
+    - Key-Value 형태로 간단한 데이터를 저장하고 관리할 수 있는 인터페이스를 제공하는 데이터베이스 클래스
+    - `UserDefaults.standard`
+  - `UIApplication`
+    - iOS에서 실행되는 중앙제어 애플리케이션 객체
+    - `UIApplication.shared`
+
+#### 참고
+
+- 객체가 불필요하게 여러 개 만들어질 필요가 없는 경우에 많이 사용
+- Ex) 환경설정, 네트워크 연결처리, 데이터 관리 등
+- 멀티 스레드 환경에서 동시에 싱글턴 객체를 참조할 경우 원치 않은 결과 도출 가능
+
+~~~ swift
+class UserInformation {
+  // 이 타입 프로퍼티를 호출하여 항상 똑같은 인스턴스 사용
+  // 하지만 shared같은 자주 쓰이는 단어로 네이밍하면 해킹 공격에 취약
+  static let shared: UserInformation = UserInformation()
+  
+  var name: String?
+  var age: String?
+}
+
+// 싱글턴에 저장 FirstController
+@IBOutlet weak var nameField: UITextField!
+...
+UserInformation.shared.name = nameField.text
+
+
+// 사용 SecondController
+@IBOutlet weak var nameLabel: UILabel!
+...
+self.nameLable.text = UserInformation.shared.name
+
+// 즉 데이터를 싱글턴에 저장 후 저장된 데이터를 사용
+~~~
+
+
+
+## View의 재사용
+
+- 화면에 표시될 뷰의 개수는 한정되어 있지만, 표현해야 하는 데이터가 많은 경우 뷰 생성보다 뷰 재사용 가능
+- 뷰를 재사용함으로써 메모리를 절약하고 성능 향상
+- Ex) UITableViewCell, UICollectionViewCell
+
+#### 재사용 원리
+
+1. 테이블뷰 및 컬렉션뷰에서 셀을 표시하기 위해 데이터 소스에 뷰(셀) 인스턴스를 요청
+2. 데이터 소스는 요청마다 새로운 셀을 만드는 대신 재사용 큐 (Reuse Queue)에 재사용을 위해 대기하고있는 셀이 있는지 확인 후 있으면 그 셀에 새로운 데이터를 설정하고, 없으면 새로운 셀을 생성
+3. 테이블뷰 및 컬렉션뷰는 데이터 소스가 셀을 반환하면 화면에 표시
+4. 사용자가 스크롤을 하게 되면 일부 셀들이 화면 밖으로 사라지면서 다시 재사용 큐에 삽입
+5. 1번부터 4번까지의 과정이 계속 반복
+
