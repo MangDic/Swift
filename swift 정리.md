@@ -52,6 +52,295 @@
 
 
 
+## MRR (Manual Retain Release)
+
+- ARC가 등장하기 전, 개발자는 모든 객체의 레퍼런스 카운트를 직접 관리해야 했음
+- 객체의 Retain(유지)과 Release(해제)를 직접 호출하는 방식을 뜻함
+- Retain
+  - NSObject  클래스의 함수이며, 객체의 레퍼런스 카운트를 증가시킴
+  - 객체가 메모리에서 해제되지 않도록 이 함수를 호출하여 레퍼런스 카운트를 증가시킬 수 있음
+- Release
+  - NSObject 클래스의 함수이며, 객체의 레퍼런스 카운트를 감소시킴
+  - 객체를 더이상 사용하지 않거나, 메모리에서 해제하고 싶을 때 이 함수를 호출하여 레퍼런스 카운트를 감소시킬 수 있음
+
+
+
+## Optional
+
+- 어떠한 변수에 값이 있을 수도 없을 수도있는 경우를 위 사용
+
+- Swift에서 기본적으로 변수를 선언할 때 non-optional인 값을 주어야 함
+
+- Optional 변수는 초기화 하지 않으면 nil로 자동 초기화
+
+- 즉, 어떠한 값을 변수에 할당해야 함
+
+  ~~~ swift
+  // test에는 Int타입만 와야 함. 정수가 아닌 nil이 들어갔으므로 에러
+  var test : Int
+  test = nil
+  
+  // 변수안에 값이 확실히 있다는 것을 보장할 수 없을 때 optional 사용
+  var test : Int?
+  test = nil
+  ~~~
+
+- ?
+
+  - Xcode는 값을 담을 곳에 노크를 함
+
+  - 만약 값이 있다면 그 안에 있는 값을 얻게 됨
+
+  - 만약 값이 있다면 nil을 반환
+
+    ~~~swift
+    // someValue 타입 어노테이션에 ?가 붙음 -> someValue에는 정수 또는 nil이 들어갈 수 있음
+    var someValue : Int? = 30
+    // Value는 optional 타입이고 Int형 값을 가질 수도, 안 가질수도 있음
+    var Value = someValue
+    // 노크를 하기 전, Int형에 Int?형을 넣었으니 오류. 서로 다른 타입!!
+    var Value : Int = someValue
+    ~~~
+
+    
+
+- !
+
+  - 강제 언래핑
+
+  - ?처럼 노크를 하지 않고 일단 부순다음 값을 가져오는 느낌
+
+  - 깨부수고 운좋게 값이 있을 수도, 없을 수도 있음
+
+    ~~~ swift
+    var someValue :Int? = 30
+    // ?는 에러가 발생했지만, !는 강제 언래핑으로 에러가 발생하지 않음
+    var Value : Int = someValue!
+    
+    // 컴파일에러 x, 빌드도 성공
+    // 하지만 널포인트 익셉션 발생
+    var someValue : Int? = nil
+    var Value : Int = someValue!
+    
+    ~~~
+
+  - !를 사용하여 값이 존재하지 않는 옵셔널 값에 접근을 시도하면 런타임 에러 발생
+
+  - !를 사용하여 강제 언래핑을 하기 전에는 항상 옵셔널 값이 nil이 아니라는 것을 확실히 해야 함
+
+  - ?와 마찬가지로 optional이기 때문에 초기화 할 때 값을 요구하지 않음 -> 초기화 안 하면 nil
+
+#### 옵셔널 바인딩
+
+- 주로 if let (또는 if var) 구문과 사용
+
+- 선 체크 후 (nil인지, 값이 있는지 확인) 경우에 따라 결과를 다르게 하고 싶을 때
+
+  ~~~ swift
+  func printName( _name : String){
+      print(_name)
+  }
+  
+   var myName: String? =  nil
+  // myName이라는 곳을 체크해보고 값이 있으면 name을 넣고 조건문 실행
+  // myName은 nil로 초기화되어 있으므로 조건문 실행 x -> 값이 있을 때만 실행
+   if let name = myName {
+       printName(_name: name)
+   }
+  ~~~
+
+  ~~~swift
+  // 값이 있으므로 조건문 실행
+  var height : Int? = 170
+  if let value = height {
+      if value >= 160 {
+          print("wow")
+      }
+  }
+  
+  // 위와 같은 코드. , 로 && 효과
+  var height : Int? = 170
+  if let value = height, value >= 160{
+       print("wow")
+  } 
+  ~~~
+
+#### 옵셔널 체이닝
+
+- 하위 property에 optional 값이 있는지 연속적으로 확인하면서, 하나라도 nil이 발견된다면 nil 반환
+
+  ~~~ swift
+  // residence 변수가 Residence 클래스 상속받고 있음
+  // residence에 ?가 붙었으므로 후에 Person 인스턴스가 생성되면 residence의 초기값은 nil
+  class Person {
+      var residence: Residence?
+  }
+  
+  class Residence 
+      var numberOfRooms = 1
+  }
+  
+  // zedd의 초기값은 nil
+  let zedd = Person()
+  
+  // 옵셔널 체이닝
+  // residence가 nil이 아니면 넘어가서 residence의 numberOfRooms를 또 확인
+  // else문 출력
+  // roomCount도 당연히 옵셔널
+  if let roomCount = zedd.residence?.numberOfRooms {
+      print("zedd's residence has \(roomCount) room(s).")
+  } 
+  else {
+     print("Unable to retrieve the number of rooms.")
+  }
+  
+  // 이렇게 수정하면 residence 값이 nil이 아니게 되고, if문 출력 
+   zedd.residence = Residence()
+  ~~~
+
+  - 값이 항상 있다는 것이 명백한 경우에는 굳이 옵셔널 바인딩과 옵셔널 체이닝 사용할 필요 없음
+
+  - 이러한 옵셔널 타입을 implicitly unwrapped optionals 라고 함
+
+  - IBOutlet 같은 변수는 연결했다는 것을 확실히 할 수 있기 때문에 !를 붙일 수 있는 것
+
+  - IBOutlet을 선언만 하고 연결을 하지 않은 경우에는 ?를 붙이면 됨
+
+    ~~~ swift
+    func optionalTest (name : String?){
+        print(name)
+    }
+    
+    func optionalErrorTest (name: String){
+        print(name)
+    }
+    
+     optionalTest(name: nil)
+    // 에러 -> 무조건 Sting이 들어가야 함
+     optionalErrorTest(name: nil)
+    ~~~
+
+    
+
+## 타입 캐스팅
+
+- 인스턴스의 타입을 확인하거나, 인스턴스의 타입을 슈퍼클래스 또는 서브클래스 타입처럼 다루기 위해 사용
+
+- is와 as라는 연산자로 구현하며, 값의 타입을 확인하거나 값을 다른 타입으로 변환하는 방법 제공
+
+  ~~~ swift
+  class Person {
+    
+      var name: String
+    
+      init(name: String) {
+          self.name = name
+      }
+  }
+  
+  var LMJ = Person(name: "LMJ")
+  
+  // LMJ라는 인스턴스가 Person의 인스턴스인가?
+  // true
+  if LMJ is Person {
+      print(true)
+  }
+  
+  // 타입뿐만 아니라 인스턴스의 프로퍼티도 확인 가능
+  // true
+  if LMJ.name is String {
+    print(true)
+  }
+  
+  ~~~
+
+  ~~~ swift
+  class MediaItem {
+  
+      var name: String
+      init(name: String) {
+          self.name = name
+      }
+  }
+  
+  
+  class Movie: MediaItem {
+  
+      var director: String
+      init(name: String, director: String) {
+  
+          self.director = director
+          super.init(name: name)
+      }
+  }
+  
+  class Song: MediaItem {
+  
+      var artist: String
+  
+      init(name: String, artist: String) {
+  
+          self.artist = artist
+  
+          super.init(name: name)
+  
+      }
+  
+  }
+  
+  // library 타입은 자연스럽게 MediaItem 타입
+  let library = [
+      Movie(name: "죽은 시인의 사회", director: "피터 위어"),
+      Song(name: "창공", artist: "김준석"),
+      Movie(name: "인터스텔라", director: "크리스토퍼 놀란"),
+      Movie(name: "공범자들", director: "최승호")
+  ]
+  
+  var movieCount = 0
+  var songCount = 0
+  
+  
+  for item in library {
+    if item is Movie {
+          movieCount += 1
+      } 
+    else if item is Song {
+          songCount += 1
+      }
+  }
+  
+  print("Media library는 \(movieCount)개의 영화 \(songCount)개의 노래")
+  
+  
+  ~~~
+
+#### Downcasting
+
+- 특정 클래스 타입의 상수 또는 변수는 하위 클래스의 인스턴스 참조 가능
+
+- 이 경우 as를 사용하여 서브 클래스 타입으로 다운캐스팅 시도 가능
+
+  ~~~ swift
+  for item in library {
+  
+    // library는 MediaItem 타입의 배열
+    // 그 안에 들어있는 인스턴스는 MediaItem의 서브클래스들인 Movie와 Song이므로 as? 로 다운캐스팅
+    // 옵셔널이기 때문에 if let 사용
+      if let movie = item as? Movie {
+          print("Movie: \(movie.name), dir. \(movie.director)")
+      } 
+      else if let song = item as? Song {
+          print("Song: \(song.name), by \(song.artist)")
+     }
+  
+  }
+  
+  ~~~
+
+  
+
+
+
 ## 타입 캐스팅에 사용하는 키워드 as
 
 #### as
