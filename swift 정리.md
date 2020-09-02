@@ -360,6 +360,107 @@
 
 
 
+## Any VS AnyObject
+
+#### Any
+
+- 함수타입을 포함하여 모든 타입의 인스턴스 표현 가능
+
+- 특정한 타입 하나가 아닌 여러 타입을 사용하고 싶은 경우
+
+- 구조체나 클래스 타입으로 구현된 값타입은 모두 가능 (Int, String, Bool ...)
+
+  ~~~ swift
+  // 둘 모두 [1, 2, "3", "4"] 리턴
+  var anyArray1 : [Any] = [1, 2, "3", "4"]
+  var anyArray2 : Array<Any> = [1, 2, "3", "4"]
+  ~~~
+
+  ~~~ swift
+  // 여러가지 타입 삽입 가능
+  var things = [Any]()
+  
+  things.append(0)
+  
+  things.append(0.0)
+  
+  things.append(42)
+  
+  things.append(3.14159)
+  
+  things.append("hello")
+  
+  things.append((3.0, 5.0))
+  
+  things.append(Movie(name: "박재성", director: "별수호자"))
+  
+  things.append({ (name: String) -> String in "Cooooooool, \(name)" })
+  ~~~
+
+  
+
+#### AnyObject
+
+- 모든 클래스 타입의 인스턴스 표현 가능
+
+- AnyObject는 모든 클래스가 암시적으로 준수하는 프로토콜
+
+- 클래스, 클래스 타입, 클래스 전용 프로토콜의 인스턴스에 대한 구체저인 타입으로 사 가능
+
+  ~~~swift
+  // 에러 error: value of type 'Int' does not conform to expected element type 'AnyObject'
+  var anyArr : [AnyObject] = [1,"hi",true,1.0]
+  // 에러 x
+  var anyArr : [AnyObject] = [1 as AnyObject, "hi" as AnyObject, true as AnyObject, 1.0 as AnyObject]
+  
+  // 클래스타입
+  class aType { }
+  class bType { }
+  
+  var anyObjectArr : [AnyObject] = [aType(),bType()]
+  
+  
+  for thing in things {
+  
+      switch thing {
+  
+      case 0 as Int:
+          print("Int타입 0")
+  
+      case 0 as Double:
+          print("Double 타입 0")
+  
+      case let someInt as Int:
+          print("0이 아닌 Int \(someInt)")
+  
+      case let someDouble as Double where someDouble > 0:
+          print("양의 Double타입 \(someDouble)")
+  
+      case is Double:
+          print("다른 Double은 출력x")
+  
+      case let someString as String:
+          print("String값은 \"\(someString)\"")
+  
+      case let (x, y) as (Double, Double):
+          print("\(x), \(y)")
+  
+      case let movie as Movie:
+          print("\(movie.name), dir. \(movie.director)")
+  
+      case let stringConverter as (String) -> String:
+          print(stringConverter("LMJ"))
+  
+      default:
+          print("else")
+      }
+  }
+  ~~~
+
+  
+
+
+
 ## Class VS Struct
 
 #### Class
@@ -959,4 +1060,150 @@ self.nameLable.text = UserInformation.shared.name
 3. 테이블뷰 및 컬렉션뷰는 데이터 소스가 셀을 반환하면 화면에 표시
 4. 사용자가 스크롤을 하게 되면 일부 셀들이 화면 밖으로 사라지면서 다시 재사용 큐에 삽입
 5. 1번부터 4번까지의 과정이 계속 반복
+
+
+
+## UIStackView
+
+- 스택뷰의 레이아웃은 스택뷰의 `axis`, `distribution`, `alignment`, `spacing`과 같은 프로퍼티를 통해 조정
+- spacing으로 간격 설정
+- 이미 존재하는 뷰들을 스택뷰에 추가
+  - 뷰들 선택 -> Editor -> Embed In -> StackView 또는 하단 Embed In Stack 버튼 클릭
+
+- UIStackView 클래스의 주요 프로퍼티
+  - `var arrangedSubviews: [UIView]`
+    - 스택뷰의 정렬된 뷰의 배열 
+    - 스택뷰에 포함된 뷰들을 이 프로퍼티에 저장하고 관리
+  - `var axis: UILayoutConstraintAxis`
+    - 레이아웃의 방향을 결정 (수직 vertical, 수평 horizontal)
+  - `var distribution: UIStackViewDistribution` 
+    - 스택뷰에 포함된 뷰가 스택뷰 내에서 어떻게 배치(분배)될지 결정
+  - `var spacing: CGFloat`
+    - 스택뷰에 정렬된 뷰들 사이의 간격을 결정 
+    - 기본 값은 0.0
+- UIStackView 클래스의 주요 메소드
+  - `func addArrangeSubview(UIView)`
+    - arrangedSubviews  배열에 마지막 요소에 뷰를 추가
+  - `func insertArrangedSubview(UIView, at: Int)`
+    - arrangedSubviews 배열의 특정 인덱스에 뷰를 추가합니다.
+  - `func removeArrangedSubview(UIView)`
+    -  스택뷰의 `arrangedSubviews` 배열로부터 뷰를 제거
+
+
+
+## Target-Action
+
+- touchDown
+
+- - 컨트롤을 터치했을 때 발생하는 이벤트
+  - UIControlEvents.touchDown
+
+- touchDownRepeat
+
+- - 컨트롤을 연속 터치 할 때 발생하는 이벤트
+  - UIControlEvents.touchDownRepeat
+
+- touchDragInside
+
+- - 컨트롤 범위 내에서 터치한 영역을 드래그 할 때 발생하는 이벤트
+  - UIControlEvents.touchDragInside
+
+- touchDragOutside
+
+- - 터치 영역이 컨트롤의 바깥쪽에서 드래그 할 때 발생하는 이벤트
+  - UIControlEvents.touchDragOutside
+
+- touchDragEnter
+
+- - 터치 영역이 컨트롤의 일정 영역 바깥쪽으로 나갔다가 다시 들어왔을 때 발생하는 이벤트
+  - UIControlEvents.touchDragEnter
+
+- touchDragExit
+
+- - 터치 영역이 컨트롤의 일정 영역 바깥쪽으로 나갔을 때 발생하는 이벤트
+  - UIControlEvents.touchDragExit
+
+- touchUpInside
+
+- - 컨트롤 영역 안쪽에서 터치 후 뗐을때 발생하는 이벤트
+  - UIControlEvents.touchUpInside
+
+- touchUpOutside
+
+- - 컨트롤 영역 안쪽에서 터치 후 컨트롤 밖에서 뗐을때 이벤트
+  - UIControlEvents.touchUpOutside
+
+- touchCancel
+
+- - 터치를 취소하는 이벤트 (touchUp 이벤트가 발생되지 않음)
+  - UIControlEvents.touchCancel
+
+- valueChanged
+
+- - 터치를 드래그 및 다른 방법으로 조작하여 값이 변경되었을때 발생하는 이벤트
+  - UIControlEvents.valueChanged
+
+- primaryActionTriggered
+
+- - 버튼이 눌릴때 발생하는 이벤트 (iOS보다는 tvOS에서 사용)
+  - UIControlEvents.primaryActionTriggered
+
+- editingDidBegin
+
+- - `UITextField`에서 편집이 시작될 때 호출되는 이벤트
+  - UIControlEvents.editingDidBegin
+
+- editingChanged
+
+- - `UITextField`에서 값이 바뀔 때마다 호출되는 이벤트
+  - UIControlEvents.editingChanged
+
+- editingDidEnd
+
+- - `UITextField`에서 외부객체와의 상호작용으로 인해 편집이 종료되었을 때 발생하는 이벤트
+  - UIControlEvents.editingDidEnd
+
+- editingDidEndOnExit
+
+- - `UITextField`의 편집상태에서 키보드의 `return` 키를 터치했을 때 발생하는 이벤트
+  - UIControlEvents.editingDidEndOnExit
+
+- allTouchEvents
+
+- - 모든 터치 이벤트
+  - UIControlEvents.allTouchEvents
+
+- allEditingEvents
+
+- - `UITextField`에서 편집작업의 이벤트
+  - UIControlEvents.allEditingEvents
+
+- applicationReserved
+
+- - 각각의 애플리케이션에서 프로그래머가 임의로 지정할 수 있는 이벤트 값의 범위
+  - UIControlEvents.applicationReserved
+
+- systemReserved
+
+- - 프레임워크 내에서 사용하는 예약된 이벤트 값의 범위
+  - UIControlEvents.systemReserved
+
+- allEvents
+
+- - 시스템 이벤트를 포함한 모든 이벤트
+  - UIControlEvents.allEvents
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
