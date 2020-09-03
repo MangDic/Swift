@@ -1195,9 +1195,110 @@ self.nameLable.text = UserInformation.shared.name
 
 
 
+## Gesture Recognizer (제스처 인식기)
 
+- 여러 제스처 관련 이벤트 인식 가능
+- 특정 제스처 이벤트 발생 시 각 타겟에 맞는 액션 메시지를 보내 제스처 관련 이벤트 처리 가능
+- UIGestureRecognizer의 하위 클래스
+  - UITapGestureRecognizer : 싱글탭 또는 멀티탭 제스처
+  - UIPinchGestureRecognizer : 핀치(Pinch) 제스처
+  - UIRotationGestureRecognizer : 회전 제스처
+  - UISwipeGestureRecognizer : 스와이프(swipe) 제스처
+  - UIPanGestureRecognizer : 드래그(drag) 제스처
+  - UIScreenEdgePanGestureRecognizer : 화면 가장자리 드래그 제스처
+  - UILongPressGestureRecognizer : 롱프레스(long-press) 제스처
 
+- 타겟-액션 연결 설정 후 UIView 메소드인 addGestureRecognizer(_:) 메소드를 통해 연결
 
+- 호출되는 액션 메소드는 아래 메소드 구현 형식 중 하나와 같아야 함
+
+  ~~~swift
+  @IBAction func myActionMethod()
+  @IBAction func myActionMethod(_sender: UIGestureRecognizer)
+  ~~~
+
+- 윈도우 뷰는 터치 이벤트 전달 전, 뷰에 추가된 제스처 인식기에 터치 이벤트 전달
+
+- 제스처 인식기가 터치 이벤트 인식 o -> 터치 이벤트 받지 못함
+
+- 제스처 인식기가 터치 이벤트 인식 x -> 터치 이벤트 받음
+
+- 일반적인 제스처 인식기 동작 흐름은 `cancelsTouchesInView`, `delaysTouchesBegan`, `delaysTouchesEnded` 프로퍼티의 값에 영향을 받음
+
+  - ###### UIGestureRecognizer 주요 메소드
+
+    - `init(target: Any?, action: Selector?)` : 제스처 인식기를 타깃-액션의 연결을 통해 초기화
+    - `func location(in: UIView?) -> CGPoint` : 제스처가 발생한 좌표를 반환
+    - `func addTarget(Any, action: Selector)` : 제스처 인식기 객체에 타깃과 액션을 추가
+    - `func removeTarget(Any?, action: Selector?)` : 제스처 인식기 객체로부터 타깃과 액션을 제거
+    - `func require(toFail: UIGestureRecognizer)` : 여러 개의 제스처 인식기를 가지고 있을 때, 제스처 인식기 사이의 의존성을 설정'
+
+  - ###### UIGestureRecognizer 주요 프로퍼티
+
+    - `var state: UIGestureRecognizerState` : 현재 제스처 인식기의 상태를 나타냄
+
+    - `var view: UIView?` : 제스처 인식기가 연결된 뷰
+
+    - `var isEnabled: Bool` : 제스처 인식기가 사용 가능한 상태인지를 나타냄
+
+    - var cancelsTouchInView
+
+      - 제스처가 인식되었을 때 터치 이벤트가 뷰로 전달되는 여부에 영향
+
+      - 이 프로퍼티가 true(기본값)이고 제스처 인식기가 제스처를 인식했다면, 해당 제스처의 터치는 뷰로 전달 x
+      - 이전에 전달된 터치들은 `touchesCancelled(_:with:)` 메시지를 통해 취소됨 
+      - 제스처 인식기가 제스처를 인식 못하거나 이 프로퍼티의 값이 false라면 뷰가 모든 터치를 전달받음
+
+    - `var delaysTouchesBegan` : began 단계에서 제스처 인식기가 추가된 뷰에 터치의 전달 지연 여부를 결정
+
+    - `var delaysTouchesEnded` : end 단계에서 제스처 인식기가 추가된 뷰에 터치의 전달 지연 여부를 결정
+
+- 사용
+
+  ~~~swift
+  // Tap Gesture Recognizer	뷰에 추가
+  // 클래스와 타겟-액션 연결
+  @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+    print("Tapped")
+  }
+  ~~~
+
+  ~~~swift
+  override func viewDidLoad() {
+    ...
+    // 액션 타겟을 통한 제스처 인식기 초기화 및 생성
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapView(gestureRecognizer:)))
+    
+    // 뷰에 제스처 인식기 연결
+    self.view.addGestureRecognizer(tapRecognizer)
+  }
+  
+  @objc func tapView(gestureRecognizer: UIGestureRecognizer) {
+    print("Tapped")
+  }
+  ~~~
+
+- ###### IOS의 Standard Gesture
+
+  - Tap : 컨트롤을 활성화하거나 항목을 선택
+
+  - Drag : 아이템을 좌우 또는 화면으로 드래그할 수 있음
+
+  - Flick : 빠르게 스크롤하거나 화면을 넘길 수 있음
+
+  - Swipe : 이전 화면으로 돌아가거나 테이블 뷰에서 숨겨진 삭제 버튼을 표시
+
+  - Double tap : 이미지 또는 콘텐츠를 확대하거나 다시 축소
+
+  - Pinch : 이미지를 세밀하게 확대하거나 다시 축소
+
+  - Touch and hold 
+
+    - 편집 가능한 텍스트 또는 선택 가능한 텍스트에서 수행될 경우 커서 지정을 위한 확대보기가 표시
+
+    - 컬렉션 뷰의 경우 항목을 재배치할 수 있는 모드로 진입
+
+  - Shake : 실행 취소 또는 다시 실행 얼럿을 띄움
 
 
 
