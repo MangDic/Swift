@@ -1432,9 +1432,9 @@ var delegate : URLSessionDelegate? {get}
   // 작업을 일시적으로 중단
   func suspend()
   // 작업의 상태를 나타냄
-  var state : URLSessionTask.State{get}
+  var state : URLSessionTask.State{ get }
   // 작업처리 우선순위로 0.0 부터 1.0 사이
-  var priority : Float{get set}
+  var priority : Float{ get set }
   ~~~
 
   
