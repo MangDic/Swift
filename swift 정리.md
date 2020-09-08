@@ -1302,7 +1302,142 @@ self.nameLable.text = UserInformation.shared.name
 
 
 
+## Button 디자인
 
+~~~swift
+button.layer.borderColor = UIColor.black.cgColor
+
+// borderWidth 넣지 않으면 테두리 생성 x
+button.layer.borderWidth = 1
+button.layer.cornerRadius = 10
+~~~
+
+
+
+## URLSession
+
+- HTTP/HTTPS를 통해 콘텐츠(데이터)를 주고받기 위해 API를 제공하는 클래스
+- 애플리케이션이 실행중이지 않거나 일시 중단된 동안 백그라운드 작업을 통해 콘텐츠 다운로드 수행 가능
+- URLSession API를 사용하기 위해 애플리케이션은 세션을 생성
+- 해당 세션은 관련된 데이터 전송작업 그룹을 조정
+
+#### URLSessionDataTask
+
+- 세션 작업을 하나로 나타내는 클래스
+
+#### Request
+
+- 서버로 요청을 보낼 때 어떤 (HTTP)메소드를 사용할 것인지, 캐싱 정책은 어떻게 할 것인지 등의 설정 가능
+
+#### Response
+
+- URL 요청의 응답을 나타내는 객체
+
+#### 세션의 유형
+
+- 유형은 URLSession 객체가 소유한 configuration 프로퍼티 객체에 의해 결정
+- 기본 세션(Default Session) 
+  - 기본 세션은 URL 다운로드를 위한 다른 파운데이션 메소드와 유사하게 동장
+  - 디스크에 저장하는 방식
+- 임시 세션(Ephemeral Session)
+  - 기본 세션과 유사하지만, 디스크에 어떤 데이터도 저장하지 않고 메모리에 올려 세션과 연결
+  - 따라서 애플리케이션이 세션을 만료시키면 세션과 관련한 데이터가 사라짐
+- 백그라운드 세션 (Background Session)
+  - 백그라운드 세션은 별도의 프로세스가 모든 데이터 전송을 처리한다는 점을 제외하고는 기본 세션과 유사
+
+#### 세션 만들기
+
+~~~ swift
+// init(configuration:) : 지정된 세션 구성으로 세션을 만듦
+init(configuration: URLSessionConfiguration)
+// shared : 싱글턴 세션 객체를 반환
+class var shared: URLSession {get}
+~~~
+
+#### 세션 구성
+
+~~~ swift
+// configuration : 이 세션에 대한 구성 객체
+@NSCopying var configuration : URLSessionConfiguraton {get}
+//delegate : 이 세션의 델리게이트
+var delegate : URLSessionDelegate? {get}
+~~~
+
+#### Task
+
+- URLSessionTask는 세션 작업 하나를 나타내는 추상 클래스
+
+- 세션 내에서 URLSession 클래스는 세 가지 작업 유형(데이터 작업, 업로드 작업, 다운로드 작업)을 지원
+
+  - URLSessionDataTask
+
+    - HTTP의 각종 메소드를 이용해 서버로부터 응답 데이터를 받아 Data 객체를 가져오는 작업 수행
+
+      ~~~swift
+      // URL에 데이터를 요청하는 데이터 작업 객체 생성
+      func dataTask(with url: URL) -> URLSessionDataTask
+      // URLRequest 객체를 기반으로 URL에 데이터를 요청하는 데이터 작업 객체 생성
+      func dataTask(with request: URLRequest) -> URLSessionDataTask
+      // URL에 데이터를 요청하고 요청에 대한 응답을 처리할 완료 핸들러를 갖는 데이터 작업 객체 생성
+      func dataTask(with url: URL, completionHandler: @escaping(Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+      // URLRequest 객체를 기반으로 URL에 데이터를 요청하고 요청에 대한 응답을 처리할 완료 핸들러를 갖는 데이터 작업 객체 생성
+      func dataTask(with request: URLRequest, completionHandler:@escaping(Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+      ~~~
+
+      
+
+  - URLSessionUploadTask
+
+    - 애플리케이션에서 웹 서버로 Data 객체 또는 파일 데이터를 업로드하는 작업 수행
+
+    - 주로 HTTP의 POST 혹은 PUT 메소드를 이용
+
+      ~~~ swift
+      // URLRequest 객체를 기반으로 URL에 데이터를 업로드하는 작업 생성
+      func uploadTask(with request: URLRequest, from bodyData: Data) -> URLSessionUploadTask
+      // URLRequest 객체를 기반으로 URL에 데이터를 업로드하고 업로드 완료 후 완료 핸드러 호출하는 작업 생성
+      func uploadTask(with request: URLRequest, from bodyData: Data?, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionUploadTask
+      // URLRequest 객체를 기반으로 URL에 파일을 업로드하는 업로드 작업 생성
+      func uploadTask(with request: URLRequest, fromFile fileURL: URL) -> URLSessionUploadTask
+      // URLRequest 객체를 기반으로 URL에 파일을 업로드하고 완료 후 완료 핸들러를 호출하는 업로드 작업 생성
+      func uploadTask(with request: URLRequest, fromFile fileURL: URL, completionHandler: @escaping(Data?, URLResponse?, Error?) -? Void) -> URLSessionUploadTask
+      ~~~
+
+      
+
+  - URLSessionDownloadTask
+
+    - 서버로부터 데이터를 다운로드 받아 파일의 형태로 저장하는 작업 수행
+
+    - 애플리케이션의 상태가 대기 중이거나 실행 중이 아니라면 백그라운드 상태에서도 다운로드 가능
+
+      ~~~ swift
+      // URL에 요청한 데이터를 다운로드 받아 파일에 저장하는 다운로드 작업 생성
+      func downloadTask(with url: URL) -> URLSessionDownloadTask
+      // URL에 요청한 데이터를 다운로드 받아 파일에 저장하고, 저장 완료 후 완료 핸들러를 호출하는 다운로드 작업 생성
+      func downloadTask(with url: URL, completionHandler: @escaping(URL?, URLResponse?, Error?) -> Void)
+      // URLRequest 객체를 기반으로 URL에 요청한 데이터를 다운로드 받아 파일로 저장하는 다운로드 작업 생성
+      func downloadTask(with request: URLRequest) -> URLSessionDownloadTask
+      // URLRequest 객체를 기반으로 URL에 요청한 데이터를 다운로드 받아 파일로 저장하고 완료 후 완료 핸들러를 호출하는 다운로드 작업 생성
+      func downloadTask(with request: URLRequest, completionHandler: @escaping(URL?, URLResponse?, Error?) -> Void) -> URLSessionDownloadTask
+      ~~~
+
+  #### 작업(Task) 상태 제어
+
+  ~~~ swift
+  // 작업 취소
+  func cancel()
+  // 일시중단된 경우 작업을 다시 시작
+  func resume()
+  // 작업을 일시적으로 중단
+  func suspend()
+  // 작업의 상태를 나타냄
+  var state : URLSessionTask.State{get}
+  // 작업처리 우선순위로 0.0 부터 1.0 사이
+  var priority : Float{get set}
+  ~~~
+
+  
 
 
 
