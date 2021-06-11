@@ -1,0 +1,756 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		99713B19760140AB6B79DA91 /* Pods_NaverOAuthTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32A70D5A2B3CD3E9C7D7EF81 /* Pods_NaverOAuthTest.framework */; };
+		ABB1F8F7A9B7FF28D8C2568C /* Pods_NaverOAuthTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C042D54440FEBE1BAB8F9D8B /* Pods_NaverOAuthTestTests.framework */; };
+		D1A33BBB71239F00B3C318F2 /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E622E72370D7D7FD42648B /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework */; };
+		DA01813026734868008DAC62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01812F26734868008DAC62 /* AppDelegate.swift */; };
+		DA01813226734868008DAC62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01813126734868008DAC62 /* SceneDelegate.swift */; };
+		DA01813426734868008DAC62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01813326734868008DAC62 /* ViewController.swift */; };
+		DA01813726734868008DAC62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA01813526734868008DAC62 /* Main.storyboard */; };
+		DA01813926734869008DAC62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA01813826734869008DAC62 /* Assets.xcassets */; };
+		DA01813C26734869008DAC62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA01813A26734869008DAC62 /* LaunchScreen.storyboard */; };
+		DA01814726734869008DAC62 /* NaverOAuthTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01814626734869008DAC62 /* NaverOAuthTestTests.swift */; };
+		DA01815226734869008DAC62 /* NaverOAuthTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01815126734869008DAC62 /* NaverOAuthTestUITests.swift */; };
+		DA018160267357E8008DAC62 /* ShowUserDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01815F267357E8008DAC62 /* ShowUserDataViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA01814326734869008DAC62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA01812426734868008DAC62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA01812B26734868008DAC62;
+			remoteInfo = NaverOAuthTest;
+		};
+		DA01814E26734869008DAC62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA01812426734868008DAC62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA01812B26734868008DAC62;
+			remoteInfo = NaverOAuthTest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		199E757BBE0CA030A91D96A4 /* Pods-NaverOAuthTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaverOAuthTestTests.debug.xcconfig"; path = "Target Support Files/Pods-NaverOAuthTestTests/Pods-NaverOAuthTestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2763CBB6716CC67EBDC5546B /* Pods-NaverOAuthTest-NaverOAuthTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaverOAuthTest-NaverOAuthTestUITests.release.xcconfig"; path = "Target Support Files/Pods-NaverOAuthTest-NaverOAuthTestUITests/Pods-NaverOAuthTest-NaverOAuthTestUITests.release.xcconfig"; sourceTree = "<group>"; };
+		32A70D5A2B3CD3E9C7D7EF81 /* Pods_NaverOAuthTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NaverOAuthTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41E622E72370D7D7FD42648B /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NaverOAuthTest_NaverOAuthTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66643DE5C83529825B0536A6 /* Pods-NaverOAuthTest-NaverOAuthTestUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaverOAuthTest-NaverOAuthTestUITests.debug.xcconfig"; path = "Target Support Files/Pods-NaverOAuthTest-NaverOAuthTestUITests/Pods-NaverOAuthTest-NaverOAuthTestUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7742551FBE8AD882E7F5DF7A /* Pods-NaverOAuthTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaverOAuthTest.debug.xcconfig"; path = "Target Support Files/Pods-NaverOAuthTest/Pods-NaverOAuthTest.debug.xcconfig"; sourceTree = "<group>"; };
+		808C539E32E3311D70C25933 /* Pods-NaverOAuthTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaverOAuthTestTests.release.xcconfig"; path = "Target Support Files/Pods-NaverOAuthTestTests/Pods-NaverOAuthTestTests.release.xcconfig"; sourceTree = "<group>"; };
+		B88E9C8A3AAD85047F776B5A /* Pods-NaverOAuthTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaverOAuthTest.release.xcconfig"; path = "Target Support Files/Pods-NaverOAuthTest/Pods-NaverOAuthTest.release.xcconfig"; sourceTree = "<group>"; };
+		C042D54440FEBE1BAB8F9D8B /* Pods_NaverOAuthTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NaverOAuthTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA01812C26734868008DAC62 /* NaverOAuthTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaverOAuthTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA01812F26734868008DAC62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DA01813126734868008DAC62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DA01813326734868008DAC62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DA01813626734868008DAC62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA01813826734869008DAC62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA01813B26734869008DAC62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DA01813D26734869008DAC62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA01814226734869008DAC62 /* NaverOAuthTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaverOAuthTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA01814626734869008DAC62 /* NaverOAuthTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverOAuthTestTests.swift; sourceTree = "<group>"; };
+		DA01814826734869008DAC62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA01814D26734869008DAC62 /* NaverOAuthTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaverOAuthTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA01815126734869008DAC62 /* NaverOAuthTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverOAuthTestUITests.swift; sourceTree = "<group>"; };
+		DA01815326734869008DAC62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA01815F267357E8008DAC62 /* ShowUserDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowUserDataViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DA01812926734868008DAC62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99713B19760140AB6B79DA91 /* Pods_NaverOAuthTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA01813F26734869008DAC62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB1F8F7A9B7FF28D8C2568C /* Pods_NaverOAuthTestTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA01814A26734869008DAC62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1A33BBB71239F00B3C318F2 /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		628A42F49E407019C04459E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32A70D5A2B3CD3E9C7D7EF81 /* Pods_NaverOAuthTest.framework */,
+				41E622E72370D7D7FD42648B /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework */,
+				C042D54440FEBE1BAB8F9D8B /* Pods_NaverOAuthTestTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CBEEA50A10696DB5624F25E1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7742551FBE8AD882E7F5DF7A /* Pods-NaverOAuthTest.debug.xcconfig */,
+				B88E9C8A3AAD85047F776B5A /* Pods-NaverOAuthTest.release.xcconfig */,
+				66643DE5C83529825B0536A6 /* Pods-NaverOAuthTest-NaverOAuthTestUITests.debug.xcconfig */,
+				2763CBB6716CC67EBDC5546B /* Pods-NaverOAuthTest-NaverOAuthTestUITests.release.xcconfig */,
+				199E757BBE0CA030A91D96A4 /* Pods-NaverOAuthTestTests.debug.xcconfig */,
+				808C539E32E3311D70C25933 /* Pods-NaverOAuthTestTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DA01812326734868008DAC62 = {
+			isa = PBXGroup;
+			children = (
+				DA01812E26734868008DAC62 /* NaverOAuthTest */,
+				DA01814526734869008DAC62 /* NaverOAuthTestTests */,
+				DA01815026734869008DAC62 /* NaverOAuthTestUITests */,
+				DA01812D26734868008DAC62 /* Products */,
+				CBEEA50A10696DB5624F25E1 /* Pods */,
+				628A42F49E407019C04459E1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DA01812D26734868008DAC62 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA01812C26734868008DAC62 /* NaverOAuthTest.app */,
+				DA01814226734869008DAC62 /* NaverOAuthTestTests.xctest */,
+				DA01814D26734869008DAC62 /* NaverOAuthTestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DA01812E26734868008DAC62 /* NaverOAuthTest */ = {
+			isa = PBXGroup;
+			children = (
+				DA01812F26734868008DAC62 /* AppDelegate.swift */,
+				DA01813126734868008DAC62 /* SceneDelegate.swift */,
+				DA01813326734868008DAC62 /* ViewController.swift */,
+				DA01813526734868008DAC62 /* Main.storyboard */,
+				DA01813826734869008DAC62 /* Assets.xcassets */,
+				DA01813A26734869008DAC62 /* LaunchScreen.storyboard */,
+				DA01813D26734869008DAC62 /* Info.plist */,
+				DA01815F267357E8008DAC62 /* ShowUserDataViewController.swift */,
+			);
+			path = NaverOAuthTest;
+			sourceTree = "<group>";
+		};
+		DA01814526734869008DAC62 /* NaverOAuthTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA01814626734869008DAC62 /* NaverOAuthTestTests.swift */,
+				DA01814826734869008DAC62 /* Info.plist */,
+			);
+			path = NaverOAuthTestTests;
+			sourceTree = "<group>";
+		};
+		DA01815026734869008DAC62 /* NaverOAuthTestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DA01815126734869008DAC62 /* NaverOAuthTestUITests.swift */,
+				DA01815326734869008DAC62 /* Info.plist */,
+			);
+			path = NaverOAuthTestUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DA01812B26734868008DAC62 /* NaverOAuthTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA01815626734869008DAC62 /* Build configuration list for PBXNativeTarget "NaverOAuthTest" */;
+			buildPhases = (
+				47BC36C55356235169DC37DA /* [CP] Check Pods Manifest.lock */,
+				DA01812826734868008DAC62 /* Sources */,
+				DA01812926734868008DAC62 /* Frameworks */,
+				DA01812A26734868008DAC62 /* Resources */,
+				C65700C48AC11BBFDA3E6CEA /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NaverOAuthTest;
+			productName = NaverOAuthTest;
+			productReference = DA01812C26734868008DAC62 /* NaverOAuthTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA01814126734869008DAC62 /* NaverOAuthTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA01815926734869008DAC62 /* Build configuration list for PBXNativeTarget "NaverOAuthTestTests" */;
+			buildPhases = (
+				4670CC0A1A5E2F62DF4E6A4A /* [CP] Check Pods Manifest.lock */,
+				DA01813E26734869008DAC62 /* Sources */,
+				DA01813F26734869008DAC62 /* Frameworks */,
+				DA01814026734869008DAC62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA01814426734869008DAC62 /* PBXTargetDependency */,
+			);
+			name = NaverOAuthTestTests;
+			productName = NaverOAuthTestTests;
+			productReference = DA01814226734869008DAC62 /* NaverOAuthTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DA01814C26734869008DAC62 /* NaverOAuthTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA01815C26734869008DAC62 /* Build configuration list for PBXNativeTarget "NaverOAuthTestUITests" */;
+			buildPhases = (
+				190E7E68A72F5DE48E08E3F4 /* [CP] Check Pods Manifest.lock */,
+				DA01814926734869008DAC62 /* Sources */,
+				DA01814A26734869008DAC62 /* Frameworks */,
+				DA01814B26734869008DAC62 /* Resources */,
+				35EC8F33DCD2C66554AAA4D1 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA01814F26734869008DAC62 /* PBXTargetDependency */,
+			);
+			name = NaverOAuthTestUITests;
+			productName = NaverOAuthTestUITests;
+			productReference = DA01814D26734869008DAC62 /* NaverOAuthTestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DA01812426734868008DAC62 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					DA01812B26734868008DAC62 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					DA01814126734869008DAC62 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = DA01812B26734868008DAC62;
+					};
+					DA01814C26734869008DAC62 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = DA01812B26734868008DAC62;
+					};
+				};
+			};
+			buildConfigurationList = DA01812726734868008DAC62 /* Build configuration list for PBXProject "NaverOAuthTest" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DA01812326734868008DAC62;
+			productRefGroup = DA01812D26734868008DAC62 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DA01812B26734868008DAC62 /* NaverOAuthTest */,
+				DA01814126734869008DAC62 /* NaverOAuthTestTests */,
+				DA01814C26734869008DAC62 /* NaverOAuthTestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA01812A26734868008DAC62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA01813C26734869008DAC62 /* LaunchScreen.storyboard in Resources */,
+				DA01813926734869008DAC62 /* Assets.xcassets in Resources */,
+				DA01813726734868008DAC62 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA01814026734869008DAC62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA01814B26734869008DAC62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		190E7E68A72F5DE48E08E3F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NaverOAuthTest-NaverOAuthTestUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		35EC8F33DCD2C66554AAA4D1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NaverOAuthTest-NaverOAuthTestUITests/Pods-NaverOAuthTest-NaverOAuthTestUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NaverOAuthTest-NaverOAuthTestUITests/Pods-NaverOAuthTest-NaverOAuthTestUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NaverOAuthTest-NaverOAuthTestUITests/Pods-NaverOAuthTest-NaverOAuthTestUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4670CC0A1A5E2F62DF4E6A4A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NaverOAuthTestTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47BC36C55356235169DC37DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NaverOAuthTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C65700C48AC11BBFDA3E6CEA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NaverOAuthTest/Pods-NaverOAuthTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NaverOAuthTest/Pods-NaverOAuthTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NaverOAuthTest/Pods-NaverOAuthTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA01812826734868008DAC62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA018160267357E8008DAC62 /* ShowUserDataViewController.swift in Sources */,
+				DA01813426734868008DAC62 /* ViewController.swift in Sources */,
+				DA01813026734868008DAC62 /* AppDelegate.swift in Sources */,
+				DA01813226734868008DAC62 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA01813E26734869008DAC62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA01814726734869008DAC62 /* NaverOAuthTestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA01814926734869008DAC62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA01815226734869008DAC62 /* NaverOAuthTestUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA01814426734869008DAC62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA01812B26734868008DAC62 /* NaverOAuthTest */;
+			targetProxy = DA01814326734869008DAC62 /* PBXContainerItemProxy */;
+		};
+		DA01814F26734869008DAC62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA01812B26734868008DAC62 /* NaverOAuthTest */;
+			targetProxy = DA01814E26734869008DAC62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA01813526734868008DAC62 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA01813626734868008DAC62 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DA01813A26734869008DAC62 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA01813B26734869008DAC62 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DA01815426734869008DAC62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DA01815526734869008DAC62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DA01815726734869008DAC62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7742551FBE8AD882E7F5DF7A /* Pods-NaverOAuthTest.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L96BVXND6V;
+				INFOPLIST_FILE = NaverOAuthTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.NaverOAuthTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DA01815826734869008DAC62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B88E9C8A3AAD85047F776B5A /* Pods-NaverOAuthTest.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L96BVXND6V;
+				INFOPLIST_FILE = NaverOAuthTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.NaverOAuthTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DA01815A26734869008DAC62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 199E757BBE0CA030A91D96A4 /* Pods-NaverOAuthTestTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L96BVXND6V;
+				INFOPLIST_FILE = NaverOAuthTestTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.NaverOAuthTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NaverOAuthTest.app/NaverOAuthTest";
+			};
+			name = Debug;
+		};
+		DA01815B26734869008DAC62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 808C539E32E3311D70C25933 /* Pods-NaverOAuthTestTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L96BVXND6V;
+				INFOPLIST_FILE = NaverOAuthTestTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.NaverOAuthTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NaverOAuthTest.app/NaverOAuthTest";
+			};
+			name = Release;
+		};
+		DA01815D26734869008DAC62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66643DE5C83529825B0536A6 /* Pods-NaverOAuthTest-NaverOAuthTestUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L96BVXND6V;
+				INFOPLIST_FILE = NaverOAuthTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.NaverOAuthTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NaverOAuthTest;
+			};
+			name = Debug;
+		};
+		DA01815E26734869008DAC62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2763CBB6716CC67EBDC5546B /* Pods-NaverOAuthTest-NaverOAuthTestUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L96BVXND6V;
+				INFOPLIST_FILE = NaverOAuthTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.NaverOAuthTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NaverOAuthTest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DA01812726734868008DAC62 /* Build configuration list for PBXProject "NaverOAuthTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA01815426734869008DAC62 /* Debug */,
+				DA01815526734869008DAC62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA01815626734869008DAC62 /* Build configuration list for PBXNativeTarget "NaverOAuthTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA01815726734869008DAC62 /* Debug */,
+				DA01815826734869008DAC62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA01815926734869008DAC62 /* Build configuration list for PBXNativeTarget "NaverOAuthTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA01815A26734869008DAC62 /* Debug */,
+				DA01815B26734869008DAC62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA01815C26734869008DAC62 /* Build configuration list for PBXNativeTarget "NaverOAuthTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA01815D26734869008DAC62 /* Debug */,
+				DA01815E26734869008DAC62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DA01812426734868008DAC62 /* Project object */;
+}

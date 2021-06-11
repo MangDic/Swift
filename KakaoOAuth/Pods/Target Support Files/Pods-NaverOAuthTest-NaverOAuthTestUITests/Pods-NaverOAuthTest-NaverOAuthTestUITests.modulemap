@@ -1,0 +1,6 @@
+framework module Pods_NaverOAuthTest_NaverOAuthTestUITests {
+  umbrella header "Pods-NaverOAuthTest-NaverOAuthTestUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
