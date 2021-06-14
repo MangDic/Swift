@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NaverOAuthTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-gw-o3t">
+                                <rect key="frame" x="62" y="712.5" width="290" height="99.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycN-n8-1AV">
+                                        <rect key="frame" x="0.0" y="0.0" width="290" height="44.5"/>
+                                        <color key="backgroundColor" red="0.50112336869999996" green="0.84450298550000003" blue="0.33713057639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="네이버 로그인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTabNaver:" destination="BYZ-38-t0r" eventType="touchUpInside" id="stE-tt-cGq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hS0-m7-iKH">
+                                        <rect key="frame" x="0.0" y="54.5" width="290" height="45"/>
+                                        <color key="backgroundColor" red="0.98952120539999999" green="0.92387479539999995" blue="0.30960226060000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="카카오 로그인">
+                                            <color key="titleColor" red="0.11762408169999999" green="0.1216918305" blue="0.1137246713" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTabKaKao:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ajL-NQ-AUk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hS0-m7-iKH" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="Kns-2G-ydB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Eex-gw-o3t" secondAttribute="bottom" constant="50" id="eRa-Wl-mNi"/>
+                            <constraint firstItem="Eex-gw-o3t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k3h-C3-ufy"/>
+                            <constraint firstItem="ycN-n8-1AV" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="tUh-Yw-w8y"/>
+                            <constraint firstItem="Eex-gw-o3t" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="ziv-KO-f0f"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-491.304347826087" y="81.696428571428569"/>
+        </scene>
+        <!--Show User Data View Controller-->
+        <scene sceneID="Spe-PC-JqP">
+            <objects>
+                <viewController storyboardIdentifier="ShowUserDataViewController" id="j8E-cz-kAC" customClass="ShowUserDataViewController" customModule="NaverOAuthTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6DI-if-uEo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qOz-vL-1aU">
+                                <rect key="frame" x="30" y="135.5" width="354" height="112"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-dl-MBS">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qk7-WO-2lZ">
+                                        <rect key="frame" x="0.0" y="30.5" width="354" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWM-82-Mey">
+                                        <rect key="frame" x="0.0" y="61" width="354" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7f3-PE-U9R">
+                                        <rect key="frame" x="0.0" y="91.5" width="354" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가져온 정보" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZI-S4-fO9">
+                                <rect key="frame" x="30" y="74" width="354" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fue-eM-vDd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fue-eM-vDd" firstAttribute="trailing" secondItem="iZI-S4-fO9" secondAttribute="trailing" constant="30" id="Bqe-nb-cBA"/>
+                            <constraint firstItem="qOz-vL-1aU" firstAttribute="leading" secondItem="fue-eM-vDd" secondAttribute="leading" constant="30" id="QuH-Qu-az1"/>
+                            <constraint firstItem="iZI-S4-fO9" firstAttribute="top" secondItem="fue-eM-vDd" secondAttribute="top" constant="30" id="ZqE-ek-GM1"/>
+                            <constraint firstItem="iZI-S4-fO9" firstAttribute="leading" secondItem="fue-eM-vDd" secondAttribute="leading" constant="30" id="dek-Wz-lef"/>
+                            <constraint firstItem="fue-eM-vDd" firstAttribute="trailing" secondItem="qOz-vL-1aU" secondAttribute="trailing" constant="30" id="xQG-w3-O7v"/>
+                            <constraint firstItem="qOz-vL-1aU" firstAttribute="top" secondItem="iZI-S4-fO9" secondAttribute="bottom" constant="30" id="zK2-qu-vaN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ageRange" destination="KWM-82-Mey" id="Yje-PZ-KcL"/>
+                        <outlet property="email" destination="Qk7-WO-2lZ" id="iAg-6s-R56"/>
+                        <outlet property="loginType" destination="7f3-PE-U9R" id="ZBW-ba-767"/>
+                        <outlet property="nickName" destination="qpN-dl-MBS" id="Wty-8z-GSz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1t-Ba-GwK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="238" y="82"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
