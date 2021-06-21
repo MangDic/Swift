@@ -14,6 +14,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var lyrics: UILabel!
+    @IBOutlet weak var lyrics2: UILabel!
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var playBtn: UIButton!
@@ -21,11 +22,16 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
+    static var getItem: NSDictionary = [:]
+    
     var player : AVAudioPlayer!
     var timer : Timer!
     var isPlay = false
     
     let baseURL = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo/song.json"
+    var dict = [Int:String]()
+    var times = [Int]()
+    var currentIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func getMusic() {
-        
         let headers: HTTPHeaders = [
         ]
         
@@ -44,7 +49,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
             .responseJSON(completionHandler: { response in
                 switch response.result {
                 case .success(let value):
-                    print(type(of: value))
                     self.setMusicItems(getData: value as! NSDictionary)
                     
                 case .failure(let error):
@@ -52,6 +56,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
                 }
             })
     }
+    
     
     func setMusicItems(getData: NSDictionary) {
         
@@ -82,18 +87,85 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         self.thumbnailImage.layer.cornerRadius = 10
         self.slider.minimumTrackTintColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         self.currentLabel.textColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        self.lyrics.textColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        
         self.lyrics.text = getData["lyrics"] as? String
+        let getlyrics = getData["lyrics"] as? String
+        
+        setLyrics(lyrics: getlyrics!)
+        
+        
+        
         self.titleLabel.text = getData["title"] as? String
         self.singerLabel.text = getData["singer"] as? String
     }
     
+    func setLyrics(lyrics: String) {
+        let list = lyrics.components(separatedBy: "\n")
+        
+        for i in list {
+
+            // 시간 분리
+            var firstIndex = i.index(i.startIndex, offsetBy: 0)
+            var lastIndex = i.index(i.startIndex, offsetBy: 11)
+            var sepaStr = i[firstIndex..<lastIndex]
+            let time = sepaStr.components(separatedBy: ["[", "]"]).joined()
+
+            let minute = Int(time.components(separatedBy: ":")[0])!
+            let second = Int(time.components(separatedBy: ":")[1])!
+            let totalTime = minute*60 + second
+
+            // 가사 분리
+            firstIndex = i.index(i.startIndex, offsetBy: 11)
+            lastIndex = i.index(i.startIndex, offsetBy: i.count)
+            sepaStr = i[firstIndex..<lastIndex]
+
+            //dict.append([totalTime:String(sepaStr)])
+            dict[totalTime] = String(sepaStr)
+            times.append(totalTime)
+        }
+    }
+    
     func setSliderValue(time: TimeInterval) {
+        
         let min : Int = Int(time/60)
         let sec : Int = Int(time.truncatingRemainder(dividingBy: 60))
+        
+        let timeValue = min*60 + sec
+        
+        self.lyrics.text = dict[findLyrics(time: timeValue)]
+        if currentIndex == times.count - 1 {
+            self.lyrics2.text = ""
+        }
+        else {
+            self.lyrics2.text = dict[times[currentIndex + 1]]
+        }
         
         let timeStr : String = String(format: "%02ld:%02ld", min,sec)
         
         self.currentLabel.text = timeStr
+    }
+    
+    func findLyrics(time: Int) -> Int {
+        
+        var start = 0
+        var end = times.count - 1
+        
+        while start <= end {
+            let mid = (start + end) / 2
+            
+            if times[mid] < time {
+                start = mid + 1
+            }
+            else if times[mid] == time {
+                currentIndex = mid
+                return times[mid]
+            }
+            else {
+                end = mid - 1
+            }
+        }
+        return end < 0 ? 0 : times[end]
     }
     
     func setDurationValue(time: TimeInterval) {

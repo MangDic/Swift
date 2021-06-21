@@ -12,13 +12,13 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VisionAPI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tRB-QG-3Hd">
-                                <rect key="frame" x="50" y="94" width="314" height="399"/>
+                                <rect key="frame" x="50" y="94" width="314" height="491"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wos-uf-sX4">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="19.5"/>
@@ -38,8 +38,14 @@
                                             <constraint firstAttribute="width" secondItem="ShT-l5-mi6" secondAttribute="height" multiplier="1:1" id="wCn-XA-Sq0"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가사" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOF-gN-UJT">
-                                        <rect key="frame" x="0.0" y="381" width="314" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOF-gN-UJT">
+                                        <rect key="frame" x="0.0" y="381" width="314" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfp-gr-Kto">
+                                        <rect key="frame" x="0.0" y="441" width="314" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -120,6 +126,7 @@
                         <outlet property="currentLabel" destination="q7W-Ye-ps1" id="cro-fa-6h2"/>
                         <outlet property="durationLabel" destination="GMq-Qt-f55" id="w4C-61-MMr"/>
                         <outlet property="lyrics" destination="BOF-gN-UJT" id="oDb-tn-rbe"/>
+                        <outlet property="lyrics2" destination="Zfp-gr-Kto" id="TaW-w7-ekF"/>
                         <outlet property="playBtn" destination="Zwh-FB-MeT" id="P6C-he-mDP"/>
                         <outlet property="singerLabel" destination="rN6-6d-ORy" id="nNi-m6-CBR"/>
                         <outlet property="slider" destination="pEu-lJ-bJA" id="EcT-hc-aaS"/>

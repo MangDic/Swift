@@ -6,15 +6,41 @@
 //
 
 import UIKit
+import Alamofire
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    let baseURL = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo/song.json"
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        print("willFinishLaunchingWithOptions")
+        getItems() { result in
+            print(result)
+        }
         return true
+    }
+    
+    func getItems(completion:@escaping (Bool)-> Void) {
+        let headers: HTTPHeaders = [
+        ]
+        print("getItems")
+        let parameters: [String: Any] = [:]
+        AF.request(baseURL, method: .get,
+                   parameters: parameters, headers: headers)
+            .responseJSON(completionHandler: { response in
+                switch response.result {
+                case .success(let value):
+                    print("가져왔다")
+                    ViewController.getItem = value as! NSDictionary
+                    completion(true)
+                    
+                case .failure(let error):
+                    print(error)
+                    completion(false)
+                }
+            })
     }
 
     // MARK: UISceneSession Lifecycle
