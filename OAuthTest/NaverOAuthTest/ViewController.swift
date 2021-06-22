@@ -9,16 +9,37 @@ import UIKit
 import KakaoSDKAuth
 import KakaoSDKUser
 import NaverThirdPartyLogin
-import Alamofire
+import GoogleSignIn
+import Gifu
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var gifImageView: GIFImageView!
+    @IBOutlet weak var changeBtn: UIButton!
     
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loginInstance?.delegate = self
-        // Do any additional setup after loading the view.
+        setGifImage()
+    }
+    @IBAction func didTabChange(_ sender: Any) {
+        if gifImageView.isAnimatingGIF {
+            gifImageView.stopAnimatingGIF()
+            changeBtn.setTitle("Play", for: .normal)
+        }
+        else {
+            gifImageView.startAnimatingGIF()
+            changeBtn.setTitle("Stop", for: .normal)
+        }
+    }
+    
+    fileprivate func setGifImage() {
+        DispatchQueue.main.async { [weak self] in
+            self?.gifImageView.animate(withGIFNamed: "teri")  {
+            }
+        }
     }
     
     fileprivate func moveNextVC() {
@@ -30,7 +51,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     fileprivate func getUserDataWithKakao() {
         UserApi.shared.me() {(user, error) in
             if let error = error {
@@ -39,31 +59,22 @@ class ViewController: UIViewController {
             else {
                 if let user = user {
                     
-                    //필요한 scope을 아래의 예제코드를 참고해서 추가한다.
-                    //아래 예제는 모든 스콥을 나열한것.
                     var scopes = [String]()
-                
                     
-                    print("가져온 정보 !")
-                    print(user.kakaoAccount?.ageRange)
-                    print(type(of: user.kakaoAccount?.ageRange?.rawValue))
-                    print(KakaoSDKUser.AgeRange.self)
-                    
-                    ShowUserDataViewController.user.nickName = (user.properties!["nickname"] as? String) ?? "Null"
+                    ShowUserDataViewController.user.nickName = (user.properties!["nickname"]) ?? "Null"
                     ShowUserDataViewController.user.age = user.kakaoAccount?.ageRange as? String ?? "Null"
                     ShowUserDataViewController.user.email = user.kakaoAccount?.email ?? "Null"
                     ShowUserDataViewController.type = "Kakao"
-//                    if (user.kakaoAccount?.profileNeedsAgreement == true) { scopes.append("profile") }
-//                    if (user.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
-//                    if (user.kakaoAccount?.birthdayNeedsAgreement == true) { scopes.append("birthday") }
-//                    if (user.kakaoAccount?.birthyearNeedsAgreement == true) { scopes.append("birthyear") }
-//                    if (user.kakaoAccount?.genderNeedsAgreement == true) { scopes.append("gender") }
-//                    if (user.kakaoAccount?.phoneNumberNeedsAgreement == true) { scopes.append("phone_number") }
-//                    if (user.kakaoAccount?.ageRangeNeedsAgreement == true) { scopes.append("age_range") }
-//                    if (user.kakaoAccount?.ciNeedsAgreement == true) { scopes.append("account_ci") }
+                    if (user.kakaoAccount?.profileNeedsAgreement == true) { scopes.append("profile") }
+                    if (user.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
+                    if (user.kakaoAccount?.birthdayNeedsAgreement == true) { scopes.append("birthday") }
+                    if (user.kakaoAccount?.birthyearNeedsAgreement == true) { scopes.append("birthyear") }
+                    if (user.kakaoAccount?.genderNeedsAgreement == true) { scopes.append("gender") }
+                    if (user.kakaoAccount?.phoneNumberNeedsAgreement == true) { scopes.append("phone_number") }
+                    if (user.kakaoAccount?.ageRangeNeedsAgreement == true) { scopes.append("age_range") }
+                    if (user.kakaoAccount?.ciNeedsAgreement == true) { scopes.append("account_ci") }
                     
                     self.moveNextVC()
-                    print(scopes)
                     
                     if scopes.count == 0  { return }
                     
@@ -97,6 +108,11 @@ class ViewController: UIViewController {
         loginInstance?.requestThirdPartyLogin()
     }
     
+    @IBAction func didTabGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.signIn()
+    }
     
     @IBAction func didTabKaKao(_ sender: Any) {
         if (UserApi.isKakaoTalkLoginAvailable()) {
@@ -124,15 +140,15 @@ extension ViewController: NaverThirdPartyLoginConnectionDelegate {
         guard let naverConnection = NaverThirdPartyLoginConnection.getSharedInstance() else { return }
         guard let accessToken = naverConnection.accessToken else { return }
         let authorization = "Bearer \(accessToken)"
-
+        
         if let url = URL(string: "https://openapi.naver.com/v1/nid/me") {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.setValue(authorization, forHTTPHeaderField: "Authorization")
-
+            
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 guard let data = data else { return }
-
+                
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
                     guard let response = json["response"] as? [String: AnyObject] else { return }
@@ -161,7 +177,7 @@ extension ViewController: NaverThirdPartyLoginConnectionDelegate {
                 } catch let error as NSError {
                     print(error)
                 }
-                }.resume()
+            }.resume()
         }
     }
     
@@ -173,20 +189,42 @@ extension ViewController: NaverThirdPartyLoginConnectionDelegate {
         // 로그인된 상태(로그아웃이나 연동해제 하지않은 상태)에서 로그인 재시도
         self.naverDataFetch()
     }
-
+    
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
         //  접근 토큰, 갱신 토큰, 연동 해제등이 실패
     }
     
-
+    
     func oauth20ConnectionDidFinishDeleteToken() {
         // 연동해제 콜백
-
+        
     }
-//
-//    func oauth20ConnectionDidOpenInAppBrowser(forOAuth request: URLRequest!) {
-//        self.present(NLoginThirdPartyOAuth20InAppBrowserViewController(request: request), animated: true, completion: nil)
-//    }
+    //
+    //    func oauth20ConnectionDidOpenInAppBrowser(forOAuth request: URLRequest!) {
+    //        self.present(NLoginThirdPartyOAuth20InAppBrowserViewController(request: request), animated: true, completion: nil)
+    //    }
+}
+
+extension ViewController: GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("The user has not signed in before or they have since signed out.")
+            } else {
+                print("\(error.localizedDescription)")
+            }
+            return
+        }
+        ShowUserDataViewController.user.email = user.profile.email
+        ShowUserDataViewController.user.nickName = user.profile.name
+        ShowUserDataViewController.type = "Google"
+        
+        self.moveNextVC()
+        
+        
+    }
 }
 
 struct getData {

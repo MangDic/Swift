@@ -18,6 +18,8 @@
 		DA01814726734869008DAC62 /* NaverOAuthTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01814626734869008DAC62 /* NaverOAuthTestTests.swift */; };
 		DA01815226734869008DAC62 /* NaverOAuthTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01815126734869008DAC62 /* NaverOAuthTestUITests.swift */; };
 		DA018160267357E8008DAC62 /* ShowUserDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01815F267357E8008DAC62 /* ShowUserDataViewController.swift */; };
+		DA5871402679DE8F00B480A3 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA58713F2679DE8F00B480A3 /* credentials.plist */; };
+		DA8F02982681CAEB00DCF9B1 /* teri.gif in Resources */ = {isa = PBXBuildFile; fileRef = DA8F02972681CAEB00DCF9B1 /* teri.gif */; };
 		DDEF8A79B20A34BE10BDA63C /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C890E50E78D5ACCCDAA817 /* Pods_NaverOAuthTest_NaverOAuthTestUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		DA01815126734869008DAC62 /* NaverOAuthTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverOAuthTestUITests.swift; sourceTree = "<group>"; };
 		DA01815326734869008DAC62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA01815F267357E8008DAC62 /* ShowUserDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowUserDataViewController.swift; sourceTree = "<group>"; };
+		DA58713F2679DE8F00B480A3 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
+		DA8F02972681CAEB00DCF9B1 /* teri.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = teri.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 		DA01812E26734868008DAC62 /* NaverOAuthTest */ = {
 			isa = PBXGroup;
 			children = (
+				DA8F02972681CAEB00DCF9B1 /* teri.gif */,
 				DA01812F26734868008DAC62 /* AppDelegate.swift */,
 				DA01813126734868008DAC62 /* SceneDelegate.swift */,
 				DA01813326734868008DAC62 /* ViewController.swift */,
@@ -149,6 +154,7 @@
 				DA01813A26734869008DAC62 /* LaunchScreen.storyboard */,
 				DA01813D26734869008DAC62 /* Info.plist */,
 				DA01815F267357E8008DAC62 /* ShowUserDataViewController.swift */,
+				DA58713F2679DE8F00B480A3 /* credentials.plist */,
 			);
 			path = NaverOAuthTest;
 			sourceTree = "<group>";
@@ -282,6 +288,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA01813C26734869008DAC62 /* LaunchScreen.storyboard in Resources */,
+				DA5871402679DE8F00B480A3 /* credentials.plist in Resources */,
+				DA8F02982681CAEB00DCF9B1 /* teri.gif in Resources */,
 				DA01813926734869008DAC62 /* Assets.xcassets in Resources */,
 				DA01813726734868008DAC62 /* Main.storyboard in Resources */,
 			);

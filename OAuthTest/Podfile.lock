@@ -5,6 +5,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - Gifu (3.3.1)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -27,6 +28,7 @@ PODS:
   - naveridlogin-sdk-ios (4.1.3)
 
 DEPENDENCIES:
+  - Gifu
   - GoogleSignIn
   - KakaoSDKAuth
   - KakaoSDKCommon
@@ -37,6 +39,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AppAuth
+    - Gifu
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
@@ -48,6 +51,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 2c792affbdc2f18016e08fdbcacd60aebe1ba593
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
@@ -56,6 +60,6 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 5d2de71fe070455bbaaad6a37af3eb500fbc8972
   naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
 
-PODFILE CHECKSUM: ba0f5b0ff0db0fa0870cd6ce64b3c589a8c95690
+PODFILE CHECKSUM: 2c80ba31618fb751cda7b1ae6089eaba672af2e1
 
 COCOAPODS: 1.10.0

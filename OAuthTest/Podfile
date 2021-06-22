@@ -12,6 +12,7 @@ target 'NaverOAuthTest' do
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
   pod 'GoogleSignIn'
+  pod 'Gifu'
 
   target 'NaverOAuthTestTests' do
     inherit! :search_paths
