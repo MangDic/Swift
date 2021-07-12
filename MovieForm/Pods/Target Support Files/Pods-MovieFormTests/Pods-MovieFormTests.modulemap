@@ -1,0 +1,6 @@
+framework module Pods_MovieFormTests {
+  umbrella header "Pods-MovieFormTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
