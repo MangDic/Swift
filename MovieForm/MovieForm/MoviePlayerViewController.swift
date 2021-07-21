@@ -8,29 +8,73 @@
 import UIKit
 import AVFoundation
 
-class MoviePlayerViewController: UIViewController {
+class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var controlView: UIView!
+    @IBOutlet weak var playButton: UIButton!
     
-    var player: AVPlayer!
+    var player = AVPlayer()
     var playerLayer: AVPlayerLayer!
     var isVideoPlaying = true
+    var isShowController = true {
+        willSet {
+            if newValue {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.controlView.alpha = 0.0
+                       }) { (result) in
+                    self.controlView.isHidden = true
+                }
+                
+            }
+            else {
+                UIView.animate(withDuration: 0.5, animations: {
+                                self.controlView.isHidden = false
+                                self.controlView.alpha = 1
+                            })
+            }
+        }
+    }
+    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//            return .landscapeRight
+//        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://va.media.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4")!
-        player = AVPlayer(url: url)
-        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
+        self.navigationController?.navigationBar.isHidden = true
+        
+//        let url = URL(string: "https://va.media.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4")!
+//        player = AVPlayer(url: url)
+//        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
         
         addTimeObserver()
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resize
         
         videoView.layer.addSublayer(playerLayer)
+        controlView.layer.zPosition = 999
+
+        let videoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapVideoView(gestureRecognizer:)))
+        
+        let controllerTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapVideoController(gestureRecognizer:)))
+        
+        videoView.addGestureRecognizer(videoTapRecognizer)
+        controlView.addGestureRecognizer(controllerTapRecognizer)
+    }
+    
+    
+    @objc func tapVideoController(gestureRecognizer: UIGestureRecognizer) {
+        print("Video Controller Tap")
+    }
+    
+    @objc func tapVideoView(gestureRecognizer: UIGestureRecognizer) {
+        isShowController = !isShowController
+        setPlayOrPause()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,17 +85,13 @@ class MoviePlayerViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         playerLayer.frame = videoView.bounds
+        
+        let height = UIScreen.main.bounds.height*0.15
+        self.controlView.frame.size.height = height
     }
+    
     @IBAction func playButtonPressed(_ sender: UIButton) {
-        if isVideoPlaying {
-            player.pause()
-            sender.setTitle("Play", for: .normal)
-        }
-        else {
-            player.play()
-            sender.setTitle("Pause", for: .normal)
-        }
-        isVideoPlaying = !isVideoPlaying
+        setPlayOrPause()
     }
     @IBAction func forewardButtonPressed(_ sender: Any) {
         guard let duration = player.currentItem?.duration else { return }
@@ -82,6 +122,18 @@ class MoviePlayerViewController: UIViewController {
         if keyPath == "duration", let duration = player.currentItem?.duration.seconds, duration > 0.0 {
             self.durationLabel.text = getTimeString(from: player.currentItem!.duration)
         }
+    }
+    
+    func setPlayOrPause() {
+        if isVideoPlaying {
+            player.pause()
+            playButton.setTitle("Play", for: .normal)
+        }
+        else {
+            player.play()
+            playButton.setTitle("Pause", for: .normal)
+        }
+        isVideoPlaying = !isVideoPlaying
     }
     
     func addTimeObserver() {

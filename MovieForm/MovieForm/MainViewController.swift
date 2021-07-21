@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MovieCell: UICollectionViewCell {
     @IBOutlet weak var thumnail: UIImageView!
@@ -18,7 +19,7 @@ class MovieCell: UICollectionViewCell {
     
 }
 
-class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -33,13 +34,17 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.detectOrientation), name: NSNotification.Name("UIDeviceOrientationDidChangeNotification"), object: nil)
+
+        
         
         movieViewModel.getMovie() { result in
             self.movies = result
         }
         
         flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: w, height: h*0.35)
+        changeCellsByDirection()
+        //flowLayout.itemSize = CGSize(width: w, height: h*0.35)
         
         collectionView.collectionViewLayout = flowLayout
         
@@ -52,6 +57,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func detectOrientation() {
+        changeCellsByDirection()
     }
     
     private func setNavigationBarButtons() {
@@ -69,19 +78,59 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 
     @objc func changeButtonDidTap() {
+        viewFlag = !viewFlag
         if viewFlag {
-            viewFlag = !viewFlag
             navigationItem.rightBarButtonItem?.title = "Cell"
-            flowLayout.itemSize = CGSize(width: w, height: h*0.35)
-            collectionView.reloadData()
         }
         else {
-            viewFlag = !viewFlag
             navigationItem.rightBarButtonItem?.title = "List"
-        
-            flowLayout.itemSize = CGSize(width: w*0.45, height: h*0.25)
-            collectionView.reloadData()
         }
+        changeCellsByDirection()
+        collectionView.reloadData()
+    }
+    
+    fileprivate func changeCellsByDirection() {
+        print("changeCellsByDirection")
+        if (UIDevice.current.orientation.isLandscape) {
+            print("가로모드")
+            if viewFlag {
+                print("셀모드")
+                flowLayout.itemSize = CGSize(width: h*0.35, height: w)
+            }
+            else {
+                print("리스트모드")
+                flowLayout.itemSize = CGSize(width: h*0.25, height: w*0.45)
+            }
+
+        }
+        else{
+            print("세로모드")
+            if viewFlag {
+                print("셀모드")
+                flowLayout.itemSize = CGSize(width: w*0.45, height: h*0.25)
+            }
+            else {
+                print("리스트모드")
+                flowLayout.itemSize = CGSize(width: w, height: h*0.35)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.item]
+               // url 가져오고 언래핑해준다.
+               let url = URL(string: "https://va.media.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4")!
+               // AVPlayerItem으로 url을 가져와 아이템으로 만들어주고
+        let item = AVPlayerItem(url: url)
+               // 이용할 스토리보드를 고르고
+               let sb = UIStoryboard(name: "Main", bundle: nil)
+               let vc = sb.instantiateViewController(identifier: "MoviePlayerViewController") as! MoviePlayerViewController
+        vc.modalPresentationStyle = .fullScreen
+               
+               // 아이템을 삽입해주고
+               vc.player.replaceCurrentItem(with: item)
+               // 실행!
+               present(vc, animated: false, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
