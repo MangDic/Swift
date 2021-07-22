@@ -90,31 +90,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     fileprivate func changeCellsByDirection() {
-        print("changeCellsByDirection")
-        if (UIDevice.current.orientation.isLandscape) {
-            print("가로모드")
-            if viewFlag {
-                print("셀모드")
-                flowLayout.itemSize = CGSize(width: h*0.35, height: w)
-            }
-            else {
-                print("리스트모드")
-                flowLayout.itemSize = CGSize(width: h*0.25, height: w*0.45)
-            }
-
+        if viewFlag {
+            print("셀모드")
+            flowLayout.itemSize = CGSize(width: w*0.45, height: h*0.25)
         }
-        else{
-            print("세로모드")
-            if viewFlag {
-                print("셀모드")
-                flowLayout.itemSize = CGSize(width: w*0.45, height: h*0.25)
-            }
-            else {
-                print("리스트모드")
-                flowLayout.itemSize = CGSize(width: w, height: h*0.35)
-            }
-        }
-    }
+        else {
+            print("리스트모드")
+            flowLayout.itemSize = CGSize(width: w, height: h*0.35)
+        }    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.item]

@@ -24,6 +24,7 @@
 		DA5A5B7E269C576B008B9BD5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5B7D269C576B008B9BD5 /* Movie.swift */; };
 		DA5A5B81269C578C008B9BD5 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5B80269C578C008B9BD5 /* MovieViewModel.swift */; };
 		DA5A5B83269C5C1B008B9BD5 /* indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5B82269C5C1B008B9BD5 /* indicator.swift */; };
+		DA726E9426A948F900BD4925 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA726E9326A948F900BD4925 /* CustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		DA5A5B7D269C576B008B9BD5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		DA5A5B80269C578C008B9BD5 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		DA5A5B82269C5C1B008B9BD5 /* indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indicator.swift; sourceTree = "<group>"; };
+		DA726E9326A948F900BD4925 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		FC9421EBE48C7422E92D63DB /* Pods-MovieForm-MovieFormUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieForm-MovieFormUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieForm-MovieFormUITests/Pods-MovieForm-MovieFormUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 		DA5A5B47269C36C0008B9BD5 /* MovieForm */ = {
 			isa = PBXGroup;
 			children = (
+				DA726E9226A948EF00BD4925 /* UI */,
 				DA5A5B7F269C5781008B9BD5 /* ViewModel */,
 				DA5A5B7C269C5758008B9BD5 /* Model */,
 				DA5A5B48269C36C0008B9BD5 /* AppDelegate.swift */,
@@ -177,6 +180,14 @@
 				DA5A5B80269C578C008B9BD5 /* MovieViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DA726E9226A948EF00BD4925 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DA726E9326A948F900BD4925 /* CustomView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		E0A6871E6415E95F3D031F51 /* Frameworks */ = {
@@ -445,6 +456,7 @@
 				DA5A5B7E269C576B008B9BD5 /* Movie.swift in Sources */,
 				DA5A5B7B269C4F02008B9BD5 /* ImageLoader.swift in Sources */,
 				DA5A5B49269C36C0008B9BD5 /* AppDelegate.swift in Sources */,
+				DA726E9426A948F900BD4925 /* CustomView.swift in Sources */,
 				DA5A5B81269C578C008B9BD5 /* MovieViewModel.swift in Sources */,
 				DA55C01126A6C22000201BCF /* MoviePlayerViewController.swift in Sources */,
 				DA5A5B4B269C36C0008B9BD5 /* SceneDelegate.swift in Sources */,

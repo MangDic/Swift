@@ -13,20 +13,24 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider!
-    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var controlView: UIView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet var mainView: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var player = AVPlayer()
     var playerLayer: AVPlayerLayer!
-    var isVideoPlaying = true
-    var isShowController = true {
+    var isVideoPlaying = true {
         willSet {
             if newValue {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.controlView.alpha = 0.0
+                    self.cancelButton.alpha = 0.0
                        }) { (result) in
+            
                     self.controlView.isHidden = true
+                    self.cancelButton.isHidden = true
                 }
                 
             }
@@ -34,37 +38,48 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
                 UIView.animate(withDuration: 0.5, animations: {
                                 self.controlView.isHidden = false
                                 self.controlView.alpha = 1
+                    
+                    self.cancelButton.isHidden = false
+                    self.cancelButton.alpha = 1
                             })
             }
         }
     }
     
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//            return .landscapeRight
-//        }
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+        
+        playerLayer.frame = CGRect(x: 0, y: 0, width: mainView.frame.width, height: mainView.frame.height)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isHidden = true
-        
-//        let url = URL(string: "https://va.media.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4")!
-//        player = AVPlayer(url: url)
-//        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
+        let url = URL(string: "https://va.media.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4")!
+        player = AVPlayer(url: url)
+        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
         
         addTimeObserver()
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resize
         
-        videoView.layer.addSublayer(playerLayer)
-        controlView.layer.zPosition = 999
+        mainView.layer.addSublayer(playerLayer)
 
         let videoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapVideoView(gestureRecognizer:)))
         
         let controllerTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapVideoController(gestureRecognizer:)))
         
-        videoView.addGestureRecognizer(videoTapRecognizer)
+        setThumbs()
+        mainView.addGestureRecognizer(videoTapRecognizer)
         controlView.addGestureRecognizer(controllerTapRecognizer)
+        setPlayOrPause()
     }
     
     
@@ -73,21 +88,22 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func tapVideoView(gestureRecognizer: UIGestureRecognizer) {
-        isShowController = !isShowController
         setPlayOrPause()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        player.play()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        playerLayer.frame = videoView.bounds
+        playerLayer.frame = mainView.bounds
         
-        let height = UIScreen.main.bounds.height*0.15
-        self.controlView.frame.size.height = height
+        controlView.layer.zPosition = 999
+        cancelButton.layer.zPosition = 999
+    }
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
     }
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
@@ -127,11 +143,11 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
     func setPlayOrPause() {
         if isVideoPlaying {
             player.pause()
-            playButton.setTitle("Play", for: .normal)
+            playButton.setImage(UIImage(named: "play"), for: .normal)
         }
         else {
             player.play()
-            playButton.setTitle("Pause", for: .normal)
+            playButton.setImage(UIImage(named: "pause"), for: .normal)
         }
         isVideoPlaying = !isVideoPlaying
     }
@@ -158,6 +174,23 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
             return String(format: "%i:%02i:%02i", arguments: [hours, minutes, seconds])
         }
         return String(format: "%02i:%02i", arguments: [minutes, seconds])
+    }
+    
+    fileprivate func setThumbs() {
+        timeSlider.setThumbImage(thumbImage(), for: .normal)
+        volumeSlider.setThumbImage(thumbImage(), for: .normal)
+    }
+    
+    fileprivate func thumbImage() -> UIImage {
+        let thumbView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        
+        thumbView.backgroundColor = .white
+        thumbView.layer.cornerRadius = thumbView.frame.height / 2
+        
+        let renderer = UIGraphicsImageRenderer(bounds: thumbView.bounds)
+        return renderer.image { context in
+            thumbView.layer.render(in: context.cgContext)
+        }
     }
     
 }
