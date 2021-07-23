@@ -25,6 +25,7 @@
 		DA5A5B81269C578C008B9BD5 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5B80269C578C008B9BD5 /* MovieViewModel.swift */; };
 		DA5A5B83269C5C1B008B9BD5 /* indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5B82269C5C1B008B9BD5 /* indicator.swift */; };
 		DA726E9426A948F900BD4925 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA726E9326A948F900BD4925 /* CustomView.swift */; };
+		DA726E9626AA9F8E00BD4925 /* Midea.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA726E9526AA9F8E00BD4925 /* Midea.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		DA5A5B80269C578C008B9BD5 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		DA5A5B82269C5C1B008B9BD5 /* indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indicator.swift; sourceTree = "<group>"; };
 		DA726E9326A948F900BD4925 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		DA726E9526AA9F8E00BD4925 /* Midea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Midea.swift; sourceTree = "<group>"; };
 		FC9421EBE48C7422E92D63DB /* Pods-MovieForm-MovieFormUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieForm-MovieFormUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieForm-MovieFormUITests/Pods-MovieForm-MovieFormUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				DA5A5B7D269C576B008B9BD5 /* Movie.swift */,
+				DA726E9526AA9F8E00BD4925 /* Midea.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 			files = (
 				DA5A5B79269C47DD008B9BD5 /* MovieDetailViewController.swift in Sources */,
 				DA5A5B4D269C36C0008B9BD5 /* MainViewController.swift in Sources */,
+				DA726E9626AA9F8E00BD4925 /* Midea.swift in Sources */,
 				DA5A5B7E269C576B008B9BD5 /* Movie.swift in Sources */,
 				DA5A5B7B269C4F02008B9BD5 /* ImageLoader.swift in Sources */,
 				DA5A5B49269C36C0008B9BD5 /* AppDelegate.swift in Sources */,

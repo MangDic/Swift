@@ -19,9 +19,10 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    var getUrl = ""
     var player = AVPlayer()
     var playerLayer: AVPlayerLayer!
-    var isVideoPlaying = true {
+    var isVideoPlaying = false {
         willSet {
             if newValue {
                 UIView.animate(withDuration: 0.5, animations: {
@@ -47,22 +48,22 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
-        
+        self.navigationController?.navigationBar.isHidden = true
+        player.play()
+        isVideoPlaying = true
         playerLayer.frame = CGRect(x: 0, y: 0, width: mainView.frame.width, height: mainView.frame.height)
         
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://va.media.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4")!
+        let url = URL(string: getUrl)!
         player = AVPlayer(url: url)
         player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
         
@@ -79,6 +80,7 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
         setThumbs()
         mainView.addGestureRecognizer(videoTapRecognizer)
         controlView.addGestureRecognizer(controllerTapRecognizer)
+        cancelButton.layer.cornerRadius = 10
         setPlayOrPause()
     }
     
@@ -103,7 +105,7 @@ class MoviePlayerViewController: UIViewController, UIGestureRecognizerDelegate {
         cancelButton.layer.zPosition = 999
     }
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func playButtonPressed(_ sender: UIButton) {

@@ -8,13 +8,15 @@ import UIKit
 
 class Movie {
     let title: String
-    let key: String
+    let url: String
+    let duration: String
     var thumbNail: UIImage
     
-    init(title: String, key: String, thumbNail : UIImage) {
+    init(title: String, url: String, thumbNail : UIImage, duration: String) {
         self.title = title
-        self.key = key
+        self.url = url
         self.thumbNail = thumbNail
+        self.duration = duration
     }
     
     func setThumbNail(thumbNail : UIImage) {
