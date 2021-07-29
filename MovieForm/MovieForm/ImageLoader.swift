@@ -10,7 +10,6 @@ import UIKit
 class ImageLoader {
     static func loadImage(url: String, completed: @escaping (UIImage?) -> Void) {
         do {
-            print("url : \(url)")
             guard let setURL = URL(string: url) else {
                 completed(UIImage())
                 return

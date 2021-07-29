@@ -16,7 +16,7 @@ class recommendCell: UICollectionViewCell {
 class MovieDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var titleStr: UILabel!
-    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var subTitle: UITextView!
     @IBOutlet weak var thumbView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -28,21 +28,13 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        guard getMovie.title != "" else {
-            return
-        }
-        self.titleStr.text = getMovie.title
-        self.subTitle.text = getMovie.description
-        ImageLoader.loadImage(url: getMovie.thumb) { image in
-            self.thumbView.image = image
-        }
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
         
         flowLayout = UICollectionViewFlowLayout()
         collectionView.collectionViewLayout = flowLayout
         
-        flowLayout.itemSize = CGSize(width: collectionView.frame.width*0.6, height: collectionView.frame.height*0.8)
+        flowLayout.itemSize = CGSize(width: collectionView.frame.width*0.4, height: collectionView.frame.height*0.8)
         flowLayout.scrollDirection = .horizontal
         
         getRecomendData()
@@ -52,9 +44,20 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func getRecomendData() {
+        self.titleStr.text = getMovie.title
+        self.subTitle.text = getMovie.description
+        self.recomendData = [detail]()
+        ImageLoader.loadImage(url: getMovie.thumb) { image in
+            self.thumbView.image = image
+        }
         viewModel.getMovie() { result in
-            self.recomendData = result
+            for item in result {
+                if item.title != self.getMovie.title {
+                    self.recomendData.append(item)
+                }
+            }
             self.collectionView.reloadData()
+            self.collectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
     
@@ -69,7 +72,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return recomendData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,8 +80,13 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, UIC
         
         ImageLoader.loadImage(url: recomendData[indexPath.row].thumb) { image in
             cell.thumbNail.image = image
-            
         }
+        cell.thumbNail.layer.cornerRadius = 10
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.getMovie = recomendData[indexPath.row]
+        getRecomendData()
     }
 }

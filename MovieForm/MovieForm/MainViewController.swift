@@ -11,6 +11,7 @@ import AVFoundation
 class MovieCell: UICollectionViewCell {
     @IBOutlet weak var thumnail: UIImageView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var subTitle: UILabel!
     
 }
 
@@ -74,10 +75,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     @objc func changeButtonDidTap() {
         viewFlag = !viewFlag
         if viewFlag {
-            navigationItem.rightBarButtonItem?.title = "Cell"
+            navigationItem.rightBarButtonItem?.title = "List"
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "")
         }
         else {
-            navigationItem.rightBarButtonItem?.title = "List"
+            navigationItem.rightBarButtonItem?.title = "Cell"
         }
         changeCellsByDirection()
         collectionView.reloadData()
@@ -85,7 +87,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     fileprivate func changeCellsByDirection() {
         if viewFlag {
-            flowLayout.itemSize = CGSize(width: w*0.45, height: h*0.25)
+            flowLayout.itemSize = CGSize(width: w / 2.0 - 10, height: h*0.23)
+            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         else {
             flowLayout.itemSize = CGSize(width: w, height: h*0.35)
@@ -105,6 +108,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             cell.thumnail.image = image
         }
         cell.thumnail.layer.cornerRadius = 10
+        cell.subTitle.text = movies[indexPath.row].subtitle
+        cell.subTitle.isHidden = false
+        cell.title.isHidden = false
+        if viewFlag {
+            cell.subTitle.isHidden = true
+            cell.title.isHidden = true
+        }
     
         return cell
     }
