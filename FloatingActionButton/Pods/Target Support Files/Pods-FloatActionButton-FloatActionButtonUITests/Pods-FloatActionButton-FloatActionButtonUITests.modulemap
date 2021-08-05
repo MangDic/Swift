@@ -1,0 +1,6 @@
+framework module Pods_FloatActionButton_FloatActionButtonUITests {
+  umbrella header "Pods-FloatActionButton-FloatActionButtonUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
