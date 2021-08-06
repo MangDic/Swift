@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'ImageSlider' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ImageSlider
+  pod 'ImageSlideshow'
+  pod "ImageSlideshow/Kingfisher"
+
+
+  target 'ImageSliderTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'ImageSliderUITests' do
+    # Pods for testing
+  end
+
+end
