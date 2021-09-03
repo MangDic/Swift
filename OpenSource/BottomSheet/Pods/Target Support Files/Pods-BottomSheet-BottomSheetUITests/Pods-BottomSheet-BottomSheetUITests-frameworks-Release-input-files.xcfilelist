@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-BottomSheet-BottomSheetUITests/Pods-BottomSheet-BottomSheetUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework
+${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework

@@ -1,0 +1,6 @@
+framework module Pods_BottomSheet {
+  umbrella header "Pods-BottomSheet-umbrella.h"
+
+  export *
+  module * { export * }
+}
